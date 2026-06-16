@@ -3,6 +3,53 @@ import { sourceBodyClasses, sourcePages } from "./sourcePages";
 
 const routes = new Set(Object.keys(sourcePages));
 const loginUrl = "https://insights.learmedical.com/login";
+const resourceArticles = [
+  {
+    title: "From the Cockpit to Control Room: Engineering Aviation-Grade Safety into Radiology",
+    date: "March 24, 2026",
+    isoDate: "2026-03-24",
+    category: "White Paper",
+    categoryValue: "white-paper",
+    pdf: "https://learmedical.com/wp-content/uploads/2026/03/From-Cockpit-to-Control-Room_-Engineering-Aviation-Grade-Safety-into-Radiology-Final-Draft-.pdf",
+    image: "https://learmedical.com/wp-content/uploads/2026/03/Screenshot-2026-03-24-144752.png",
+  },
+  {
+    title: "Fundamentals of Diagnostic Error in Imaging",
+    date: "March 5, 2026",
+    isoDate: "2026-03-05",
+    category: "E-Book",
+    categoryValue: "e-book",
+    pdf: "https://learmedical.com/wp-content/uploads/2026/03/Fundamentals-of-Diagnostic-Error-in-Imaging-1.pdf",
+    image: "https://learmedical.com/wp-content/uploads/2026/03/thumbnail-0-2.jpeg",
+  },
+  {
+    title: "Errors and Cost",
+    date: "March 5, 2026",
+    isoDate: "2026-03-05",
+    category: "E-Book",
+    categoryValue: "e-book",
+    pdf: "https://learmedical.com/wp-content/uploads/2026/03/Errors-and-Cost.pdf",
+    image: "https://learmedical.com/wp-content/uploads/2026/03/download.png",
+  },
+  {
+    title: "An International Survey of Quality and Safety Programs in Radiology",
+    date: "March 5, 2026",
+    isoDate: "2026-03-05",
+    category: "E-Book",
+    categoryValue: "e-book",
+    pdf: "https://learmedical.com/wp-content/uploads/2026/03/An-International-Survey-of-Quality-and-Safety-Programs-in-Radiology.pdf",
+    image: "https://learmedical.com/wp-content/uploads/2026/03/thumbnail-0.jpeg",
+  },
+  {
+    title: "Clinical Radiology Workforce Census Report",
+    date: "March 5, 2026",
+    isoDate: "2026-03-05",
+    category: "E-Book",
+    categoryValue: "e-book",
+    pdf: "https://learmedical.com/wp-content/uploads/2026/03/rcr-2024-clinical-radiology-workforce-census-report.pdf",
+    image: "https://learmedical.com/wp-content/uploads/2026/03/Screenshot-2026-03-05-191550.png",
+  },
+];
 
 function normalizePath(pathname) {
   const path = pathname.replace(/\/+$/, "") || "/";
@@ -112,9 +159,136 @@ function loadResourceWidgets(path) {
   }, 1200);
 }
 
+function renderResourceCard(article) {
+  return `
+    <div class="resource-card" data-pdf="${article.pdf}" data-title="${article.title}">
+      <div class="row align-items-center">
+        <div class="col-lg-7 col-8">
+          <div class="article-badgeslist mb-3">
+            <div class="date-post-lear">${article.date}</div>
+            <div class="article-lgcategory">${article.category}</div>
+          </div>
+          <h5 class="article-heading-lear">${article.title}</h5>
+          <div class="mt-4 d-flex gap-3">
+            <a href="${article.pdf}" class="anchor-tag downloadpdf" target="_blank" rel="noopener noreferrer">
+              <span>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 7L7 13M7 13L13 7M7 13L7 0.999999" stroke="#1B2550" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              Download PDF
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-5 col-4 text-lg-end">
+          <img src="${article.image}" class="img-fluid js-view-pdf thumb-sl-slid" alt="${article.title}" style="pointer-events: none;">
+        </div>
+      </div>
+    </div>`;
+}
+
+function setupResourceArticles(path) {
+  if (path !== "/resources") return;
+  const form = document.getElementById("resourceFilterForm");
+  const results = document.getElementById("resourceResults");
+  const skeleton = document.getElementById("resourceSkeleton");
+  const resetBtn = document.getElementById("resetFilters");
+  if (!form || !results || form.dataset.localResourceFilter === "true") return;
+
+  form.dataset.localResourceFilter = "true";
+
+  const getSortValue = () => {
+    const visibleSort = [...form.querySelectorAll('[name="sort"]')]
+      .find((node) => getComputedStyle(node).display !== "none");
+    return visibleSort?.value || "DESC";
+  };
+
+  const hasActiveFilters = () => {
+    const data = new FormData(form);
+    return Boolean(
+      data.get("s")
+      || data.get("from_date")
+      || data.get("to_date")
+      || data.get("category")
+      || getSortValue() !== "DESC"
+    );
+  };
+
+  const render = () => {
+    const data = new FormData(form);
+    const search = String(data.get("s") || "").trim().toLowerCase();
+    const fromDate = String(data.get("from_date") || "");
+    const toDate = String(data.get("to_date") || "");
+    const category = String(data.get("category") || "");
+    const sort = getSortValue();
+
+    let articles = resourceArticles.filter((article) => {
+      const matchesSearch = !search || article.title.toLowerCase().includes(search);
+      const matchesCategory = !category || article.categoryValue === category;
+      const matchesFrom = !fromDate || article.isoDate >= fromDate;
+      const matchesTo = !toDate || article.isoDate <= toDate;
+      return matchesSearch && matchesCategory && matchesFrom && matchesTo;
+    });
+
+    articles = articles.sort((a, b) => {
+      const comparison = a.isoDate.localeCompare(b.isoDate);
+      return sort === "ASC" ? comparison : -comparison;
+    });
+
+    skeleton?.classList.add("d-none");
+    results.classList.remove("d-none");
+    results.innerHTML = articles.length
+      ? articles.map(renderResourceCard).join("")
+      : `<div class="resource-card"><h5 class="article-heading-lear mb-0">No resources found.</h5></div>`;
+    resetBtn?.classList.toggle("d-none", !hasActiveFilters());
+  };
+
+  let debounceTimer;
+  form.addEventListener("change", render);
+  form.addEventListener("input", (event) => {
+    if (event.target?.name !== "s") return;
+    window.clearTimeout(debounceTimer);
+    debounceTimer = window.setTimeout(render, 250);
+  });
+  form.addEventListener("keyup", (event) => {
+    if (event.target?.name !== "s") return;
+    window.clearTimeout(debounceTimer);
+    debounceTimer = window.setTimeout(render, 250);
+  });
+  resetBtn?.addEventListener("click", () => {
+    form.reset();
+    render();
+  });
+
+  render();
+}
+
+function scheduleResourceArticles(path) {
+  if (path !== "/resources") return;
+
+  let attempts = 0;
+  const setup = () => {
+    setupResourceArticles(path);
+    const form = document.getElementById("resourceFilterForm");
+    if (form?.dataset.localResourceFilter === "true" || attempts >= 12) return;
+    attempts += 1;
+    window.setTimeout(setup, 50);
+  };
+
+  window.setTimeout(setup, 0);
+}
+
 export function App() {
   const [path, setPath] = useState(() => normalizePath(window.location.pathname));
   const html = useMemo(() => sourcePages[path] || sourcePages["/"], [path]);
+  const renderedHtml = useMemo(() => {
+    if (path !== "/resources") return html;
+    const resourceCards = resourceArticles.map(renderResourceCard).join("");
+    return html.replace(
+      '<div id="resourceResults"></div>',
+      `<div id="resourceResults">${resourceCards}</div>`
+    );
+  }, [path, html]);
 
   useEffect(() => {
     const onPop = () => setPath(normalizePath(window.location.pathname));
@@ -129,8 +303,11 @@ export function App() {
     document.documentElement.classList.add("js");
     window.scrollTo({ top: 0, behavior: "instant" });
     requestAnimationFrame(activateStaticSwipers);
-    requestAnimationFrame(() => loadResourceWidgets(path));
-  }, [path, html]);
+    requestAnimationFrame(() => {
+      loadResourceWidgets(path);
+      scheduleResourceArticles(path);
+    });
+  }, [path, renderedHtml]);
 
   useEffect(() => {
     const handleClick = (event) => {
@@ -192,7 +369,7 @@ export function App() {
   return (
     <div
       className="source-site"
-      dangerouslySetInnerHTML={{ __html: html }}
+      dangerouslySetInnerHTML={{ __html: renderedHtml }}
     />
   );
 }
