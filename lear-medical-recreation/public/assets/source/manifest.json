@@ -1,0 +1,165 @@
+{
+  "assets": [
+    {
+      "contentType": "text/css",
+      "id": "59e305d6fee9f9dc",
+      "kind": "stylesheet",
+      "name": "css2",
+      "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/59e305d6fee9f9dc",
+      "url": "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    },
+    {
+      "contentType": "text/css",
+      "id": "4ef75bfcaeb5e844",
+      "kind": "stylesheet",
+      "name": "styles.css",
+      "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/4ef75bfcaeb5e844.css",
+      "url": "https://learmedical.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=6.1.6"
+    },
+    {
+      "contentType": "text/css",
+      "id": "373d0679e1b439b1",
+      "kind": "stylesheet",
+      "name": "style.css",
+      "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/373d0679e1b439b1.css",
+      "url": "https://learmedical.com/wp-content/themes/lear-medical/style.css?ver=1.0.0"
+    },
+    {
+      "contentType": "text/css",
+      "id": "89b877f300d7ce65",
+      "kind": "stylesheet",
+      "name": "bootstrap.min.css",
+      "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/89b877f300d7ce65.css",
+      "url": "https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css?ver=5.3.8"
+    },
+    {
+      "contentType": "text/css",
+      "id": "f897c4fe56d68b80",
+      "kind": "stylesheet",
+      "name": "swiper-bundle.min.css",
+      "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/f897c4fe56d68b80.css",
+      "url": "https://cdn.jsdelivr.net/npm/swiper@12.0.3/swiper-bundle.min.css?ver=12.0.3"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "fba3ea2a29471890",
+      "kind": "image",
+      "name": "Logo-5.svg",
+      "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/fba3ea2a29471890.svg",
+      "url": "https://learmedical.com/wp-content/uploads/2025/10/Logo-5.svg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "51b250c2a56d804c",
+      "kind": "image",
+      "name": "conatct.jpg",
+      "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/51b250c2a56d804c.jpg",
+      "url": "https://learmedical.com/wp-content/uploads/2026/02/conatct.jpg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "a8dad76df8743ee4",
+      "kind": "image",
+      "name": "contactbg.jpg",
+      "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/a8dad76df8743ee4.jpg",
+      "url": "https://learmedical.com/wp-content/uploads/2026/02/contactbg.jpg"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "bf924715e38a09cd",
+      "kind": "image",
+      "name": "footer-watermark.svg",
+      "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/bf924715e38a09cd.svg",
+      "url": "https://learmedical.com/wp-content/themes/lear-medical/assets/images/footer-watermark.svg"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "78a514ab0e7f646a",
+      "kind": "image",
+      "name": "linkedin.svg",
+      "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/78a514ab0e7f646a.svg",
+      "url": "https://learmedical.com/wp-content/uploads/2026/06/linkedin.svg"
+    },
+    {
+      "contentType": "font/woff2",
+      "id": "7b8c41b64553cfc8",
+      "kind": "font",
+      "name": "metropolis-latin-400-normal.woff2",
+      "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/7b8c41b64553cfc8.woff2",
+      "url": "https://learmedical.com/wp-content/themes/lear-medical/assets/font/metropolis-latin-400-normal.woff2"
+    },
+    {
+      "contentType": "font/woff2",
+      "id": "2e65ed1a3476b480",
+      "kind": "font",
+      "name": "metropolis-latin-500-normal.woff2",
+      "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/2e65ed1a3476b480.woff2",
+      "url": "https://learmedical.com/wp-content/themes/lear-medical/assets/font/metropolis-latin-500-normal.woff2"
+    },
+    {
+      "contentType": "font/woff2",
+      "id": "cea6194a1406e805",
+      "kind": "font",
+      "name": "metropolis-latin-600-normal.woff2",
+      "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/cea6194a1406e805.woff2",
+      "url": "https://learmedical.com/wp-content/themes/lear-medical/assets/font/metropolis-latin-600-normal.woff2"
+    },
+    {
+      "contentType": "font/woff2",
+      "id": "3ec49561fba1ea68",
+      "kind": "font",
+      "name": "metropolis-latin-700-normal.woff2",
+      "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/3ec49561fba1ea68.woff2",
+      "url": "https://learmedical.com/wp-content/themes/lear-medical/assets/font/metropolis-latin-700-normal.woff2"
+    },
+    {
+      "contentType": "font/woff2",
+      "id": "603b73ed6c2ec407",
+      "kind": "font",
+      "name": "metropolis-latin-800-normal.woff2",
+      "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/603b73ed6c2ec407.woff2",
+      "url": "https://learmedical.com/wp-content/themes/lear-medical/assets/font/metropolis-latin-800-normal.woff2"
+    },
+    {
+      "contentType": "font/woff2",
+      "id": "27adf2d09307ae75",
+      "kind": "font",
+      "name": "metropolis-latin-900-normal.woff2",
+      "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/27adf2d09307ae75.woff2",
+      "url": "https://learmedical.com/wp-content/themes/lear-medical/assets/font/metropolis-latin-900-normal.woff2"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "4dcecae658a8888b",
+      "kind": "image",
+      "name": "svg-1",
+      "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/4dcecae658a8888b.svg",
+      "url": "inline-svg:4dcecae658a8888b"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "635c21d9fd263b15",
+      "kind": "image",
+      "name": "svg-2",
+      "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/635c21d9fd263b15.svg",
+      "url": "inline-svg:635c21d9fd263b15"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "80f0d6ec83af4bff",
+      "kind": "image",
+      "name": "svg-3",
+      "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/80f0d6ec83af4bff.svg",
+      "url": "inline-svg:80f0d6ec83af4bff"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "ab86a19e02233bc4",
+      "kind": "image",
+      "name": "svg-4",
+      "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/ab86a19e02233bc4.svg",
+      "url": "inline-svg:ab86a19e02233bc4"
+    }
+  ],
+  "failures": []
+}
