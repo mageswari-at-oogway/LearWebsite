@@ -36,11 +36,11 @@
 - Copy and content: public homepage, About, Services, Resources, and Contact text/section order are recreated from captured DOM and screenshots.
 
 **Patches Made Since QA**
-- Rebuilt the Vite app around source-derived WordPress page fragments for Home, About, Services, Resources, and Contact instead of the earlier hand-composed React approximation.
+- Rebuilt the Astro static site around source-derived WordPress page fragments for Home, About, Services, Resources, and Contact instead of the earlier hand-composed approximation.
 - Replaced the custom stylesheet with the original captured CSS stack: Bootstrap, Swiper, Contact Form 7, and the Lear Medical theme stylesheet.
-- Added a small React routing/interaction shell for internal navigation, login, offcanvas mobile menu, modals, and static carousel states while preserving the original markup/classes.
+- Added a small Astro-bundled browser interaction script for login, offcanvas mobile menu, modals, Resources filtering, scroll behavior, and static carousel states while preserving the original markup/classes.
 - Added theme-compatible local paths for the Metropolis font files, plus pattern background, CTA background, and the two missing decorative Vector SVGs.
-- Switched the project direction to React + Vite per user request.
+- Switched the project direction to Astro static output per user request.
 - Added local source asset bundle under `public/assets/source`.
 - Implemented responsive header, mobile drawer, login dropdown, brochure/resource modals, service carousel controls, contact form state, and all public top-level pages.
 - Updated document metadata from the starter title.
@@ -57,7 +57,7 @@
 - Restored missing Services content from source HTML: detailed includes, key benefits, Basic QA, Standard Peer Review, Delivery Model, and Why Choose This Service.
 
 **Follow-up Polish**
-- The site now inherits the original page section structure and theme CSS. The remaining difference is runtime behavior from WordPress/Swiper scripts; the React shell handles navigation, login, mobile menu, modals, and stable first carousel states, but not every exact carousel autoplay/timing sequence.
+- The site now inherits the original page section structure and theme CSS. The remaining difference is runtime behavior from WordPress/Swiper scripts; the Astro browser script handles login, mobile menu, modals, Resources filtering, and stable first carousel states, but not every exact carousel autoplay/timing sequence.
 - Some image URLs intentionally remain pointed at the authorized Lear Medical source where the capture did not preserve confident original filenames; visible source assets are still used rather than placeholders.
 - Browser screenshot automation was unavailable in the final pass, so verification used production build, source-section checks, localhost process status, and source bundle checks.
 

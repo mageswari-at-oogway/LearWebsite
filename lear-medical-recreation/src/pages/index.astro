@@ -1,0 +1,12 @@
+---
+import Page from "../layouts/Page.astro";
+import { sourceBodyClasses, sourcePages } from "../sourcePages.js";
+
+const path = "/";
+---
+<Page
+  path={path}
+  bodyClass={sourceBodyClasses[path]}
+  html={sourcePages[path]}
+  title="Lear Medical"
+/>

@@ -1,0 +1,19 @@
+---
+import "../styles.css";
+import siteScript from "../scripts/site.js?url";
+
+const { bodyClass, html, path, title = "Lear Medical" } = Astro.props;
+---
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Astro" />
+    <title>{title}</title>
+  </head>
+  <body class={bodyClass} data-lear-path={path}>
+    <div class="source-site" set:html={html} />
+    <script type="module" src={siteScript}></script>
+  </body>
+</html>

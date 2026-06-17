@@ -1,55 +1,7 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { sourceBodyClasses, sourcePages } from "./sourcePages";
+import { resourceArticles, renderResourceCard } from "../resourceArticles.js";
 
-const routes = new Set(Object.keys(sourcePages));
 const loginUrl = "https://insights.learmedical.com/login";
-const resourceArticles = [
-  {
-    title: "From the Cockpit to Control Room: Engineering Aviation-Grade Safety into Radiology",
-    date: "March 24, 2026",
-    isoDate: "2026-03-24",
-    category: "White Paper",
-    categoryValue: "white-paper",
-    pdf: "https://learmedical.com/wp-content/uploads/2026/03/From-Cockpit-to-Control-Room_-Engineering-Aviation-Grade-Safety-into-Radiology-Final-Draft-.pdf",
-    image: "https://learmedical.com/wp-content/uploads/2026/03/Screenshot-2026-03-24-144752.png",
-  },
-  {
-    title: "Fundamentals of Diagnostic Error in Imaging",
-    date: "March 5, 2026",
-    isoDate: "2026-03-05",
-    category: "E-Book",
-    categoryValue: "e-book",
-    pdf: "https://learmedical.com/wp-content/uploads/2026/03/Fundamentals-of-Diagnostic-Error-in-Imaging-1.pdf",
-    image: "https://learmedical.com/wp-content/uploads/2026/03/thumbnail-0-2.jpeg",
-  },
-  {
-    title: "Errors and Cost",
-    date: "March 5, 2026",
-    isoDate: "2026-03-05",
-    category: "E-Book",
-    categoryValue: "e-book",
-    pdf: "https://learmedical.com/wp-content/uploads/2026/03/Errors-and-Cost.pdf",
-    image: "https://learmedical.com/wp-content/uploads/2026/03/download.png",
-  },
-  {
-    title: "An International Survey of Quality and Safety Programs in Radiology",
-    date: "March 5, 2026",
-    isoDate: "2026-03-05",
-    category: "E-Book",
-    categoryValue: "e-book",
-    pdf: "https://learmedical.com/wp-content/uploads/2026/03/An-International-Survey-of-Quality-and-Safety-Programs-in-Radiology.pdf",
-    image: "https://learmedical.com/wp-content/uploads/2026/03/thumbnail-0.jpeg",
-  },
-  {
-    title: "Clinical Radiology Workforce Census Report",
-    date: "March 5, 2026",
-    isoDate: "2026-03-05",
-    category: "E-Book",
-    categoryValue: "e-book",
-    pdf: "https://learmedical.com/wp-content/uploads/2026/03/rcr-2024-clinical-radiology-workforce-census-report.pdf",
-    image: "https://learmedical.com/wp-content/uploads/2026/03/Screenshot-2026-03-05-191550.png",
-  },
-];
+const routes = new Set(["/", "/about", "/services", "/resources", "/contact"]);
 
 function normalizePath(pathname) {
   const path = pathname.replace(/\/+$/, "") || "/";
@@ -159,34 +111,6 @@ function loadResourceWidgets(path) {
   }, 1200);
 }
 
-function renderResourceCard(article) {
-  return `
-    <div class="resource-card" data-pdf="${article.pdf}" data-title="${article.title}">
-      <div class="row align-items-center">
-        <div class="col-lg-7 col-8">
-          <div class="article-badgeslist mb-3">
-            <div class="date-post-lear">${article.date}</div>
-            <div class="article-lgcategory">${article.category}</div>
-          </div>
-          <h5 class="article-heading-lear">${article.title}</h5>
-          <div class="mt-4 d-flex gap-3">
-            <a href="${article.pdf}" class="anchor-tag downloadpdf" target="_blank" rel="noopener noreferrer">
-              <span>
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M1 7L7 13M7 13L13 7M7 13L7 0.999999" stroke="#1B2550" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-              Download PDF
-            </a>
-          </div>
-        </div>
-        <div class="col-lg-5 col-4 text-lg-end">
-          <img src="${article.image}" class="img-fluid js-view-pdf thumb-sl-slid" alt="${article.title}" style="pointer-events: none;">
-        </div>
-      </div>
-    </div>`;
-}
-
 function setupResourceArticles(path) {
   if (path !== "/resources") return;
   const form = document.getElementById("resourceFilterForm");
@@ -265,7 +189,6 @@ function setupResourceArticles(path) {
 
 function scheduleResourceArticles(path) {
   if (path !== "/resources") return;
-
   let attempts = 0;
   const setup = () => {
     setupResourceArticles(path);
@@ -274,104 +197,94 @@ function scheduleResourceArticles(path) {
     attempts += 1;
     window.setTimeout(setup, 50);
   };
-
   window.setTimeout(setup, 0);
 }
 
-export function App() {
-  const [path, setPath] = useState(() => normalizePath(window.location.pathname));
-  const html = useMemo(() => sourcePages[path] || sourcePages["/"], [path]);
-  const renderedHtml = useMemo(() => {
-    if (path !== "/resources") return html;
-    const resourceCards = resourceArticles.map(renderResourceCard).join("");
-    return html.replace(
-      '<div id="resourceResults"></div>',
-      `<div id="resourceResults">${resourceCards}</div>`
-    );
-  }, [path, html]);
-
-  useEffect(() => {
-    const onPop = () => setPath(normalizePath(window.location.pathname));
-    window.addEventListener("popstate", onPop);
-    return () => window.removeEventListener("popstate", onPop);
-  }, []);
-
-  useEffect(() => {
-    const bodyClass = sourceBodyClasses[path] || sourceBodyClasses["/"] || "";
-    document.body.className = bodyClass;
-    document.documentElement.classList.remove("no-js");
-    document.documentElement.classList.add("js");
-    window.scrollTo({ top: 0, behavior: "instant" });
-    requestAnimationFrame(activateStaticSwipers);
-    requestAnimationFrame(() => {
-      loadResourceWidgets(path);
-      scheduleResourceArticles(path);
-    });
-  }, [path, renderedHtml]);
-
-  useEffect(() => {
-    const handleClick = (event) => {
-      const target = event.target;
-      if (!(target instanceof Element)) return;
-
-      const dismiss = target.closest("[data-bs-dismiss]");
-      if (dismiss?.getAttribute("data-bs-dismiss") === "modal") {
-        event.preventDefault();
-        closeModal(dismiss.closest(".modal"));
-        return;
-      }
-      if (dismiss?.getAttribute("data-bs-dismiss") === "offcanvas") {
-        event.preventDefault();
-        closeOffcanvas();
-        return;
-      }
-
-      const toggle = target.closest("[data-bs-toggle]");
-      if (toggle?.getAttribute("data-bs-toggle") === "modal") {
-        event.preventDefault();
-        openModal(toggle.getAttribute("data-bs-target") || toggle.getAttribute("href"));
-        return;
-      }
-      if (toggle?.getAttribute("data-bs-toggle") === "offcanvas") {
-        event.preventDefault();
-        openOffcanvas(toggle.getAttribute("data-bs-target") || toggle.getAttribute("href"));
-        return;
-      }
-
-      const loginButton = target.closest(".btn-login");
-      if (loginButton) {
-        event.preventDefault();
-        window.open(loginUrl, "_blank", "noopener,noreferrer");
-        return;
-      }
-
-      const link = target.closest("a[href]");
-      if (!link) return;
-      const href = link.getAttribute("href");
-      if (!href || href.startsWith("#") || href.startsWith("javascript:")) return;
-
-      const url = new URL(href, window.location.href);
-      const nextPath = normalizePath(url.pathname);
-      const isLocalRoute = url.origin === window.location.origin && routes.has(nextPath);
-      if (!isLocalRoute) return;
-
-      event.preventDefault();
-      closeOffcanvas();
-      closeModal(document.querySelector(".modal.show"));
-      window.history.pushState({}, "", nextPath);
-      setPath(nextPath);
-    };
-
-    document.addEventListener("click", handleClick);
-    return () => document.removeEventListener("click", handleClick);
-  }, []);
-
-  return (
-    <div
-      className="source-site"
-      dangerouslySetInnerHTML={{ __html: renderedHtml }}
-    />
-  );
+function setupScrollTop() {
+  const button = document.getElementById("scrollTopBtn");
+  if (!button) return;
+  const update = () => button.classList.toggle("show", window.scrollY > 400);
+  button.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+  window.addEventListener("scroll", update, { passive: true });
+  update();
 }
 
-export default App;
+function setupQueryScroll() {
+  const targetId = new URLSearchParams(window.location.search).get("scroll");
+  if (!targetId) return;
+  window.setTimeout(() => {
+    document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, 150);
+}
+
+function setupClickHandlers() {
+  document.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+
+    const dismiss = target.closest("[data-bs-dismiss]");
+    if (dismiss?.getAttribute("data-bs-dismiss") === "modal") {
+      event.preventDefault();
+      closeModal(dismiss.closest(".modal"));
+      return;
+    }
+    if (dismiss?.getAttribute("data-bs-dismiss") === "offcanvas") {
+      event.preventDefault();
+      closeOffcanvas();
+      return;
+    }
+
+    const toggle = target.closest("[data-bs-toggle]");
+    if (toggle?.getAttribute("data-bs-toggle") === "modal") {
+      event.preventDefault();
+      openModal(toggle.getAttribute("data-bs-target") || toggle.getAttribute("href"));
+      return;
+    }
+    if (toggle?.getAttribute("data-bs-toggle") === "offcanvas") {
+      event.preventDefault();
+      openOffcanvas(toggle.getAttribute("data-bs-target") || toggle.getAttribute("href"));
+      return;
+    }
+
+    const loginButton = target.closest(".btn-login");
+    if (loginButton) {
+      event.preventDefault();
+      window.open(loginUrl, "_blank", "noopener,noreferrer");
+      return;
+    }
+
+    const link = target.closest("a[href]");
+    if (!link) return;
+    const href = link.getAttribute("href");
+    if (!href || href.startsWith("javascript:")) {
+      event.preventDefault();
+      return;
+    }
+
+    const url = new URL(href, window.location.href);
+    if (url.origin === window.location.origin && routes.has(normalizePath(url.pathname))) {
+      closeOffcanvas();
+      closeModal(document.querySelector(".modal.show"));
+    }
+  });
+}
+
+function setupPage() {
+  const path = normalizePath(window.location.pathname);
+  document.documentElement.classList.remove("no-js");
+  document.documentElement.classList.add("js");
+  requestAnimationFrame(activateStaticSwipers);
+  requestAnimationFrame(() => {
+    loadResourceWidgets(path);
+    scheduleResourceArticles(path);
+  });
+  setupScrollTop();
+  setupQueryScroll();
+  setupClickHandlers();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", setupPage, { once: true });
+} else {
+  setupPage();
+}
