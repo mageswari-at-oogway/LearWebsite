@@ -2,6 +2,7 @@ import { resourceArticles, renderResourceCard } from "../resourceArticles.js";
 
 const loginUrl = "https://insights.learmedical.com/login";
 const routes = new Set(["/", "/about", "/services", "/resources", "/contact"]);
+let currentPdfUrl = "";
 
 function normalizePath(pathname) {
   const path = pathname.replace(/\/+$/, "") || "/";
@@ -217,10 +218,37 @@ function setupQueryScroll() {
   }, 150);
 }
 
+function setupLoginButtons() {
+  document.querySelectorAll(".btn-login[onclick]").forEach((button) => {
+    button.removeAttribute("onclick");
+  });
+}
+
+function setSelectedPdf(url) {
+  currentPdfUrl = url || currentPdfUrl;
+  const field = document.getElementById("pdf_url");
+  if (field && "value" in field) field.value = currentPdfUrl;
+}
+
+function openPdfGate() {
+  closeModal(document.querySelector("#pdfViewModal.show"));
+  openModal(document.getElementById("casestudy-pop") ? "#casestudy-pop" : "#downloadPopup");
+}
+
 function setupClickHandlers() {
   document.addEventListener("click", (event) => {
     const target = event.target;
     if (!(target instanceof Element)) return;
+
+    const pdfTrigger = target.closest("[data-pdf]");
+    if (pdfTrigger) setSelectedPdf(pdfTrigger.getAttribute("data-pdf"));
+
+    const openDownload = target.closest(".js-open-download");
+    if (openDownload) {
+      event.preventDefault();
+      openPdfGate();
+      return;
+    }
 
     const dismiss = target.closest("[data-bs-dismiss]");
     if (dismiss?.getAttribute("data-bs-dismiss") === "modal") {
@@ -273,6 +301,7 @@ function setupPage() {
   const path = normalizePath(window.location.pathname);
   document.documentElement.classList.remove("no-js");
   document.documentElement.classList.add("js");
+  setupLoginButtons();
   requestAnimationFrame(activateStaticSwipers);
   requestAnimationFrame(() => {
     loadResourceWidgets(path);

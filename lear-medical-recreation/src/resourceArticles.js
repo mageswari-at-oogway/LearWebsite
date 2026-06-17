@@ -76,8 +76,14 @@ export function renderResourceCard(article) {
 
 export function injectResourceArticles(html) {
   const cards = resourceArticles.map(renderResourceCard).join("");
-  return html.replace(
-    '<div id="resourceResults"></div>',
+  const nextHtml = html.replace(
+    /<div\s+id=(["'])resourceResults\1\s*><\/div>/,
     `<div id="resourceResults">${cards}</div>`
   );
+
+  if (nextHtml === html) {
+    throw new Error("Missing resourceResults container in resources page HTML");
+  }
+
+  return nextHtml;
 }

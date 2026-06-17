@@ -13,13 +13,17 @@ export function getStaticPaths() {
 }
 
 const { path } = Astro.props;
-const sourceHtml = sourcePages[path] || sourcePages["/"];
+const sourceHtml = sourcePages[path];
+const bodyClass = sourceBodyClasses[path];
+if (!sourceHtml || !bodyClass) {
+  throw new Error(`Missing source page content for ${path}`);
+}
 const html = path === "/resources" ? injectResourceArticles(sourceHtml) : sourceHtml;
 const label = path === "/" ? "" : ` | ${path.slice(1).replace(/-/g, " ")}`;
 ---
 <Page
   path={path}
-  bodyClass={sourceBodyClasses[path] || sourceBodyClasses["/"]}
+  bodyClass={bodyClass}
   html={html}
   title={`Lear Medical${label}`}
 />
