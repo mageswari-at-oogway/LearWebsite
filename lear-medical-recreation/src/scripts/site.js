@@ -57,6 +57,7 @@ function activateStaticSwipers() {
   document.querySelectorAll(".swiper").forEach((swiper) => {
     const wrapper = swiper.querySelector(".swiper-wrapper");
     if (!wrapper || swiper.dataset.staticSwiper === "true") return;
+    if (swiper.classList.contains("service-content-slider") || swiper.classList.contains("service-image-slider")) return;
     swiper.dataset.staticSwiper = "true";
     const slides = [...wrapper.querySelectorAll(".swiper-slide")];
     if (swiper.classList.contains("mediaSwiper")) {
@@ -75,6 +76,81 @@ function activateStaticSwipers() {
       slide.classList.toggle("swiper-slide-next", index === activeIndex + 1);
     });
   });
+}
+
+function setupServicesCarousel() {
+  const contentSlider = document.querySelector(".service-content-slider");
+  const imageSlider = document.querySelector(".service-image-slider");
+  if (!contentSlider || !imageSlider || contentSlider.dataset.learCarousel === "true") return;
+
+  const contentSlides = [...contentSlider.querySelectorAll(".swiper-slide")];
+  const imageSlides = [...imageSlider.querySelectorAll(".swiper-slide")];
+  const slideCount = Math.min(contentSlides.length, imageSlides.length);
+  if (!slideCount) return;
+
+  contentSlider.dataset.learCarousel = "true";
+  imageSlider.dataset.learCarousel = "true";
+
+  const pagination = contentSlider.querySelector(".swiper-pagination");
+  let activeIndex = 0;
+  let rotationTimer;
+
+  const bullets = pagination
+    ? Array.from({ length: slideCount }, (_, index) => {
+      const bullet = document.createElement("button");
+      bullet.type = "button";
+      bullet.className = "swiper-pagination-bullet";
+      bullet.setAttribute("aria-label", `Show service ${index + 1}`);
+      pagination.appendChild(bullet);
+      return bullet;
+    })
+    : [];
+
+  const applySlideState = () => {
+    const previousIndex = (activeIndex - 1 + slideCount) % slideCount;
+    const nextIndex = (activeIndex + 1) % slideCount;
+
+    [contentSlides, imageSlides].forEach((slides) => {
+      slides.forEach((slide, index) => {
+        const isActive = index === activeIndex;
+        slide.classList.toggle("swiper-slide-active", isActive);
+        slide.classList.toggle("swiper-slide-visible", isActive);
+        slide.classList.toggle("swiper-slide-fully-visible", isActive);
+        slide.classList.toggle("swiper-slide-prev", index === previousIndex);
+        slide.classList.toggle("swiper-slide-next", index === nextIndex);
+        slide.setAttribute("aria-hidden", isActive ? "false" : "true");
+      });
+    });
+
+    bullets.forEach((bullet, index) => {
+      bullet.classList.toggle("swiper-pagination-bullet-active", index === activeIndex);
+      bullet.setAttribute("aria-current", index === activeIndex ? "true" : "false");
+    });
+  };
+
+  const goTo = (index) => {
+    activeIndex = (index + slideCount) % slideCount;
+    applySlideState();
+  };
+
+  const restartRotation = () => {
+    window.clearInterval(rotationTimer);
+    rotationTimer = window.setInterval(() => goTo(activeIndex + 1), 4200);
+  };
+
+  bullets.forEach((bullet, index) => {
+    bullet.addEventListener("click", () => {
+      goTo(index);
+      restartRotation();
+    });
+  });
+
+  const section = contentSlider.closest(".medical-services-section-home");
+  section?.addEventListener("mouseenter", () => window.clearInterval(rotationTimer));
+  section?.addEventListener("mouseleave", restartRotation);
+
+  goTo(activeIndex);
+  restartRotation();
 }
 
 function loadResourceWidgets(path) {
@@ -302,6 +378,7 @@ function setupPage() {
   document.documentElement.classList.remove("no-js");
   document.documentElement.classList.add("js");
   setupLoginButtons();
+  requestAnimationFrame(setupServicesCarousel);
   requestAnimationFrame(activateStaticSwipers);
   requestAnimationFrame(() => {
     loadResourceWidgets(path);
