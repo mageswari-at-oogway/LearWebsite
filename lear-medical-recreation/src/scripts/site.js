@@ -92,8 +92,10 @@ function setupServicesCarousel() {
   imageSlider.dataset.learCarousel = "true";
 
   const pagination = contentSlider.querySelector(".swiper-pagination");
-  let activeIndex = 0;
+  let activeIndex = slideCount - 1;
   let rotationTimer;
+
+  pagination?.classList.add("swiper-pagination-vertical", "swiper-pagination-bullets");
 
   const bullets = pagination
     ? Array.from({ length: slideCount }, (_, index) => {
@@ -110,16 +112,40 @@ function setupServicesCarousel() {
     const previousIndex = (activeIndex - 1 + slideCount) % slideCount;
     const nextIndex = (activeIndex + 1) % slideCount;
 
-    [contentSlides, imageSlides].forEach((slides) => {
-      slides.forEach((slide, index) => {
-        const isActive = index === activeIndex;
-        slide.classList.toggle("swiper-slide-active", isActive);
-        slide.classList.toggle("swiper-slide-visible", isActive);
-        slide.classList.toggle("swiper-slide-fully-visible", isActive);
-        slide.classList.toggle("swiper-slide-prev", index === previousIndex);
-        slide.classList.toggle("swiper-slide-next", index === nextIndex);
-        slide.setAttribute("aria-hidden", isActive ? "false" : "true");
-      });
+    contentSlides.forEach((slide, index) => {
+      const isActive = index === activeIndex;
+      slide.classList.toggle("swiper-slide-active", isActive);
+      slide.classList.toggle("swiper-slide-visible", isActive);
+      slide.classList.toggle("swiper-slide-fully-visible", isActive);
+      slide.classList.toggle("swiper-slide-prev", index === previousIndex);
+      slide.classList.toggle("swiper-slide-next", index === nextIndex);
+      slide.setAttribute("aria-hidden", isActive ? "false" : "true");
+    });
+
+    imageSlides.forEach((slide, index) => {
+      const isActive = index === activeIndex;
+      const forwardDistance = (index - activeIndex + slideCount) % slideCount;
+      const stackDepth = forwardDistance === 0 ? 0 : slideCount - forwardDistance;
+      const isNext = forwardDistance === 1;
+      const coverflow = [
+        { opacity: 1, scale: 1, y: 0, z: 6 },
+        { opacity: 1, scale: 0.828, y: -169, z: 5 },
+        { opacity: 0, scale: 0.707, y: -288, z: 4 },
+        { opacity: 0, scale: 0.616, y: -376, z: 3 },
+        { opacity: 0, scale: 0.545, y: -444, z: 2 },
+      ];
+      const state = isActive ? coverflow[0] : isNext ? coverflow[4] : coverflow[Math.min(stackDepth, 4)];
+
+      slide.classList.toggle("swiper-slide-active", isActive);
+      slide.classList.toggle("swiper-slide-visible", isActive);
+      slide.classList.toggle("swiper-slide-fully-visible", isActive);
+      slide.classList.toggle("swiper-slide-prev", index === previousIndex);
+      slide.classList.toggle("swiper-slide-next", index === nextIndex);
+      slide.setAttribute("aria-hidden", isActive ? "false" : "true");
+      slide.style.opacity = String(state.opacity);
+      slide.style.pointerEvents = isActive ? "auto" : "none";
+      slide.style.transform = `translateY(${state.y}px) scale(${state.scale})`;
+      slide.style.zIndex = String(state.z);
     });
 
     bullets.forEach((bullet, index) => {
