@@ -1,14 +1,15 @@
 ---
 import Page from "../layouts/Page.astro";
+import { getPage } from "../cms/strapi.js";
 import { getSeo } from "../seo.js";
-import { sourceBodyClasses, sourcePages } from "../sourcePages.js";
 
 const path = "/";
-const seo = getSeo(path);
+const page = await getPage(path);
+const seo = getSeo(path, page?.seo);
 ---
 <Page
   path={path}
-  bodyClass={sourceBodyClasses[path]}
-  html={sourcePages[path]}
+  bodyClass={page.bodyClass}
+  html={page.html}
   seo={seo}
 />

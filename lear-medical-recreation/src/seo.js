@@ -1,4 +1,4 @@
-const siteUrl = (import.meta.env.PUBLIC_SITE_URL || "https://learwebsite.pages.dev").replace(/\/$/, "");
+const siteUrl = ((import.meta.env || {}).PUBLIC_SITE_URL || "https://learwebsite.pages.dev").replace(/\/$/, "");
 const updatedDate = "2026-06-18";
 
 export const seoDefaults = {
@@ -51,13 +51,20 @@ export const seoByPath = {
   },
 };
 
-export function getSeo(path) {
+export function getSeo(path, overrides = {}) {
+  const base = seoByPath[path] || seoByPath["/"];
+  const cleanOverrides = Object.fromEntries(
+    Object.entries(overrides || {}).filter(([, value]) => value !== undefined && value !== null && value !== "")
+  );
+  const imagePath = cleanOverrides.image || base.image || seoDefaults.defaultImage;
+
   return {
     ...seoDefaults,
-    ...(seoByPath[path] || seoByPath["/"]),
+    ...base,
+    ...cleanOverrides,
     path,
     canonical: `${siteUrl}${path === "/" ? "/" : path}`,
-    image: `${siteUrl}${(seoByPath[path]?.image || seoDefaults.defaultImage)}`,
+    image: imagePath.startsWith("http") ? imagePath : `${siteUrl}${imagePath}`,
     updatedDate,
   };
 }

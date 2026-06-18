@@ -1,11 +1,12 @@
 ---
 import Page from "../layouts/Page.astro";
+import { getPage, getResourceArticles, getSitePages } from "../cms/strapi.js";
 import { injectResourceArticles } from "../resourceArticles.js";
 import { getSeo } from "../seo.js";
-import { sourceBodyClasses, sourcePages } from "../sourcePages.js";
 
-export function getStaticPaths() {
-  return Object.keys(sourcePages)
+export async function getStaticPaths() {
+  const pages = await getSitePages();
+  return Object.keys(pages)
     .filter((path) => path !== "/")
     .map((path) => ({
       params: { slug: path.slice(1) },
@@ -14,17 +15,17 @@ export function getStaticPaths() {
 }
 
 const { path } = Astro.props;
-const sourceHtml = sourcePages[path];
-const bodyClass = sourceBodyClasses[path];
-if (!sourceHtml || !bodyClass) {
+const page = await getPage(path);
+if (!page?.html || !page?.bodyClass) {
   throw new Error(`Missing source page content for ${path}`);
 }
-const html = path === "/resources" ? injectResourceArticles(sourceHtml) : sourceHtml;
-const seo = getSeo(path);
+const resourceArticles = path === "/resources" ? await getResourceArticles() : [];
+const html = path === "/resources" ? injectResourceArticles(page.html, resourceArticles) : page.html;
+const seo = getSeo(path, page.seo);
 ---
 <Page
   path={path}
-  bodyClass={bodyClass}
+  bodyClass={page.bodyClass}
   html={html}
   seo={seo}
 />

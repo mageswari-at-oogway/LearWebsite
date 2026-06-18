@@ -74,8 +74,8 @@ export function renderResourceCard(article) {
     </div>`;
 }
 
-export function injectResourceArticles(html) {
-  const cards = resourceArticles.map(renderResourceCard).join("");
+export function injectResourceArticles(html, articles = resourceArticles) {
+  const cards = articles.map(renderResourceCard).join("");
   const nextHtml = html.replace(
     /<div\s+id=(["'])resourceResults\1\s*><\/div>/,
     `<div id="resourceResults">${cards}</div>`
