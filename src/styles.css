@@ -1,7 +1,7 @@
-@import "/assets/source/89b877f300d7ce65.css";
-@import "/assets/source/f897c4fe56d68b80.css";
-@import "/assets/source/4ef75bfcaeb5e844.css";
-@import "/assets/source/373d0679e1b439b1.css";
+@import "./vendor/css/bootstrap.css";
+@import "./vendor/css/swiper.css";
+@import "./vendor/css/forms.css";
+@import "./vendor/css/theme.css";
 
 .seo-visually-hidden {
   position: absolute;
@@ -17,7 +17,7 @@
 
 @font-face {
   font-family: "Metropolis";
-  src: url("/assets/source/7b8c41b64553cfc8.woff2") format("woff2");
+  src: url("/assets/site/7b8c41b64553cfc8.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -25,7 +25,7 @@
 
 @font-face {
   font-family: "Metropolis";
-  src: url("/assets/source/2e65ed1a3476b480.woff2") format("woff2");
+  src: url("/assets/site/2e65ed1a3476b480.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -33,7 +33,7 @@
 
 @font-face {
   font-family: "Metropolis";
-  src: url("/assets/source/cea6194a1406e805.woff2") format("woff2");
+  src: url("/assets/site/cea6194a1406e805.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -41,7 +41,7 @@
 
 @font-face {
   font-family: "Metropolis";
-  src: url("/assets/source/3ec49561fba1ea68.woff2") format("woff2");
+  src: url("/assets/site/3ec49561fba1ea68.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -49,7 +49,7 @@
 
 @font-face {
   font-family: "Metropolis";
-  src: url("/assets/source/603b73ed6c2ec407.woff2") format("woff2");
+  src: url("/assets/site/603b73ed6c2ec407.woff2") format("woff2");
   font-weight: 800;
   font-style: normal;
   font-display: swap;
@@ -57,7 +57,7 @@
 
 @font-face {
   font-family: "Metropolis";
-  src: url("/assets/source/27adf2d09307ae75.woff2") format("woff2");
+  src: url("/assets/site/27adf2d09307ae75.woff2") format("woff2");
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -72,16 +72,16 @@ body {
 }
 
 #root,
-.source-site,
-.source-site > #page {
+.site-shell,
+.site-shell > #page {
   min-height: 100vh;
 }
 
-.source-site a {
+.site-shell a {
   cursor: pointer;
 }
 
-.source-site img {
+.site-shell img {
   max-width: 100%;
 }
 
@@ -307,8 +307,7 @@ a[href="/contact"] {
   text-decoration: none;
 }
 
-/* Source About page inline timeline styles. The WordPress page ships these in
-   the About body, so they must live after the imported theme CSS here. */
+/* About timeline styles must load after the vendor theme CSS. */
 .timeline-container {
   display: flex;
   padding-left: 10%;

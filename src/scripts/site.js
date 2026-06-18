@@ -190,7 +190,7 @@ function loadResourceWidgets(path) {
       const fallback = document.createElement("div");
       fallback.className = "lear-social-fallback";
       fallback.innerHTML = `
-        <img src="/mirrored/learmedical/wp-content/uploads/2026/02/1eb905717a6ca186042290a3bfcb9ce7cb8ff851.png" alt="Lear Medical social media post">
+        <img src="/media/site/uploads/2026/02/1eb905717a6ca186042290a3bfcb9ce7cb8ff851.png" alt="Lear Medical social media post">
         <div class="featured-content mt-3">
           <div class="meta mb-2">
             <span class="pill video">Social Media</span>

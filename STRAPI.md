@@ -47,8 +47,8 @@ Collection type: `resource-article`
 
 Astro fetches Strapi during `npm run build`, generates static HTML, and deploys the result to Cloudflare Pages. No client-side CMS dependency is shipped to users.
 
-The existing recreated UI remains the fallback source, so the site is safe to deploy before editors finish entering CMS content.
+The existing Astro UI remains the local fallback content, so the site is safe to deploy before editors finish entering CMS content.
 
-Resource articles are merged from both sources. Strapi articles are shown first by date, local mirrored articles remain available, and duplicate articles are removed when the title and PDF URL match.
+Resource articles are merged from Strapi and local content. Strapi articles are shown first by date, local articles remain available, and duplicate articles are removed when the title and PDF URL match.
 
 `/sitemap.xml` is generated during the Astro build and includes Strapi-provided pages automatically.

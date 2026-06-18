@@ -7,7 +7,7 @@ const pageSeo = seo || {
   title,
   description: "Lear Medical helps improve radiology quality, safety and diagnostic performance.",
   canonical: "https://learwebsite.pages.dev/",
-  image: "https://learwebsite.pages.dev/mirrored/learmedical/wp-content/uploads/2026/02/banner-main-1.jpg",
+  image: "https://learwebsite.pages.dev/media/site/uploads/2026/02/banner-main-1.jpg",
   siteName: "Lear Medical",
   keywords: "radiology quality assurance, diagnostic safety",
 };
@@ -41,7 +41,7 @@ const seoHtml = prepareSeoHtml(path, html);
     {jsonLd.map((item) => <script type="application/ld+json" set:html={JSON.stringify(item)} />)}
   </head>
   <body class={bodyClass} data-lear-path={path}>
-    <div class="source-site" set:html={seoHtml} />
+    <div class="site-shell" set:html={seoHtml} />
     <script>
       import "../scripts/site.js";
     </script>

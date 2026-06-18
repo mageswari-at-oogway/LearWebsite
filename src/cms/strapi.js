@@ -1,5 +1,5 @@
 import { resourceArticles as fallbackResourceArticles } from "../resourceArticles.js";
-import { sourceBodyClasses, sourcePages } from "../sourcePages.js";
+import { siteBodyClasses, sitePages } from "../content/pages.js";
 
 const env = import.meta.env || {};
 const strapiUrl = (env.STRAPI_URL || env.PUBLIC_STRAPI_URL || "").replace(/\/$/, "");
@@ -78,8 +78,8 @@ function normalizePage(entry) {
   const path = normalizePath(attributes.path || attributes.slug);
   return {
     path,
-    bodyClass: attributes.bodyClass || sourceBodyClasses[path] || sourceBodyClasses["/"],
-    html: attributes.html || attributes.contentHtml || attributes.body || sourcePages[path],
+    bodyClass: attributes.bodyClass || siteBodyClasses[path] || siteBodyClasses["/"],
+    html: attributes.html || attributes.contentHtml || attributes.body || sitePages[path],
     seo: normalizeSeo(attributes),
   };
 }
@@ -120,12 +120,12 @@ function fallbackDisplayDate(value) {
 
 export async function getSitePages() {
   const fallbackPages = Object.fromEntries(
-    Object.keys(sourcePages).map((path) => [
+    Object.keys(sitePages).map((path) => [
       path,
       {
         path,
-        bodyClass: sourceBodyClasses[path],
-        html: sourcePages[path],
+        bodyClass: siteBodyClasses[path],
+        html: sitePages[path],
         seo: {},
       },
     ])
