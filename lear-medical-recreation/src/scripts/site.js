@@ -171,10 +171,6 @@ function setupServicesCarousel() {
     });
   });
 
-  const section = contentSlider.closest(".medical-services-section-home");
-  section?.addEventListener("mouseenter", () => window.clearInterval(rotationTimer));
-  section?.addEventListener("mouseleave", restartRotation);
-
   goTo(activeIndex);
   restartRotation();
 }
