@@ -14,7 +14,7 @@
       "kind": "stylesheet",
       "name": "styles.css",
       "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/4ef75bfcaeb5e844.css",
-      "url": "https://learmedical.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=6.1.6"
+      "url": "/mirrored/learmedical/wp-content/plugins/contact-form-7/includes/css/styles.css"
     },
     {
       "contentType": "text/css",
@@ -22,7 +22,7 @@
       "kind": "stylesheet",
       "name": "style.css",
       "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/373d0679e1b439b1.css",
-      "url": "https://learmedical.com/wp-content/themes/lear-medical/style.css?ver=1.0.0"
+      "url": "/mirrored/learmedical/wp-content/themes/lear-medical/style.css"
     },
     {
       "contentType": "text/css",
@@ -46,7 +46,7 @@
       "kind": "image",
       "name": "Logo-5.svg",
       "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/fba3ea2a29471890.svg",
-      "url": "https://learmedical.com/wp-content/uploads/2025/10/Logo-5.svg"
+      "url": "/mirrored/learmedical/wp-content/uploads/2025/10/Logo-5.svg"
     },
     {
       "contentType": "image/jpeg",
@@ -54,7 +54,7 @@
       "kind": "image",
       "name": "conatct.jpg",
       "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/51b250c2a56d804c.jpg",
-      "url": "https://learmedical.com/wp-content/uploads/2026/02/conatct.jpg"
+      "url": "/mirrored/learmedical/wp-content/uploads/2026/02/conatct.jpg"
     },
     {
       "contentType": "image/jpeg",
@@ -62,7 +62,7 @@
       "kind": "image",
       "name": "contactbg.jpg",
       "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/a8dad76df8743ee4.jpg",
-      "url": "https://learmedical.com/wp-content/uploads/2026/02/contactbg.jpg"
+      "url": "/mirrored/learmedical/wp-content/uploads/2026/02/contactbg.jpg"
     },
     {
       "contentType": "image/svg+xml",
@@ -70,7 +70,7 @@
       "kind": "image",
       "name": "footer-watermark.svg",
       "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/bf924715e38a09cd.svg",
-      "url": "https://learmedical.com/wp-content/themes/lear-medical/assets/images/footer-watermark.svg"
+      "url": "/mirrored/learmedical/wp-content/themes/lear-medical/assets/images/footer-watermark.svg"
     },
     {
       "contentType": "image/svg+xml",
@@ -78,7 +78,7 @@
       "kind": "image",
       "name": "linkedin.svg",
       "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/78a514ab0e7f646a.svg",
-      "url": "https://learmedical.com/wp-content/uploads/2026/06/linkedin.svg"
+      "url": "/mirrored/learmedical/wp-content/uploads/2026/06/linkedin.svg"
     },
     {
       "contentType": "font/woff2",
@@ -86,7 +86,7 @@
       "kind": "font",
       "name": "metropolis-latin-400-normal.woff2",
       "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/7b8c41b64553cfc8.woff2",
-      "url": "https://learmedical.com/wp-content/themes/lear-medical/assets/font/metropolis-latin-400-normal.woff2"
+      "url": "/mirrored/learmedical/wp-content/themes/lear-medical/assets/font/metropolis-latin-400-normal.woff2"
     },
     {
       "contentType": "font/woff2",
@@ -94,7 +94,7 @@
       "kind": "font",
       "name": "metropolis-latin-500-normal.woff2",
       "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/2e65ed1a3476b480.woff2",
-      "url": "https://learmedical.com/wp-content/themes/lear-medical/assets/font/metropolis-latin-500-normal.woff2"
+      "url": "/mirrored/learmedical/wp-content/themes/lear-medical/assets/font/metropolis-latin-500-normal.woff2"
     },
     {
       "contentType": "font/woff2",
@@ -102,7 +102,7 @@
       "kind": "font",
       "name": "metropolis-latin-600-normal.woff2",
       "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/cea6194a1406e805.woff2",
-      "url": "https://learmedical.com/wp-content/themes/lear-medical/assets/font/metropolis-latin-600-normal.woff2"
+      "url": "/mirrored/learmedical/wp-content/themes/lear-medical/assets/font/metropolis-latin-600-normal.woff2"
     },
     {
       "contentType": "font/woff2",
@@ -110,7 +110,7 @@
       "kind": "font",
       "name": "metropolis-latin-700-normal.woff2",
       "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/3ec49561fba1ea68.woff2",
-      "url": "https://learmedical.com/wp-content/themes/lear-medical/assets/font/metropolis-latin-700-normal.woff2"
+      "url": "/mirrored/learmedical/wp-content/themes/lear-medical/assets/font/metropolis-latin-700-normal.woff2"
     },
     {
       "contentType": "font/woff2",
@@ -118,7 +118,7 @@
       "kind": "font",
       "name": "metropolis-latin-800-normal.woff2",
       "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/603b73ed6c2ec407.woff2",
-      "url": "https://learmedical.com/wp-content/themes/lear-medical/assets/font/metropolis-latin-800-normal.woff2"
+      "url": "/mirrored/learmedical/wp-content/themes/lear-medical/assets/font/metropolis-latin-800-normal.woff2"
     },
     {
       "contentType": "font/woff2",
@@ -126,7 +126,7 @@
       "kind": "font",
       "name": "metropolis-latin-900-normal.woff2",
       "path": "/var/folders/2g/hcf57cj94bx1cth1m1pm533h0000gn/T/browser-use/assets/c4ae96ab-0b97-4c5d-aada-01ddff755606/27adf2d09307ae75.woff2",
-      "url": "https://learmedical.com/wp-content/themes/lear-medical/assets/font/metropolis-latin-900-normal.woff2"
+      "url": "/mirrored/learmedical/wp-content/themes/lear-medical/assets/font/metropolis-latin-900-normal.woff2"
     },
     {
       "contentType": "image/svg+xml",

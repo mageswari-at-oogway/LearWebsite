@@ -5,8 +5,8 @@ export const resourceArticles = [
     isoDate: "2026-03-24",
     category: "White Paper",
     categoryValue: "white-paper",
-    pdf: "https://learmedical.com/wp-content/uploads/2026/03/From-Cockpit-to-Control-Room_-Engineering-Aviation-Grade-Safety-into-Radiology-Final-Draft-.pdf",
-    image: "https://learmedical.com/wp-content/uploads/2026/03/Screenshot-2026-03-24-144752.png",
+    pdf: "/mirrored/learmedical/wp-content/uploads/2026/03/From-Cockpit-to-Control-Room_-Engineering-Aviation-Grade-Safety-into-Radiology-Final-Draft-.pdf",
+    image: "/mirrored/learmedical/wp-content/uploads/2026/03/Screenshot-2026-03-24-144752.png",
   },
   {
     title: "Fundamentals of Diagnostic Error in Imaging",
@@ -14,8 +14,8 @@ export const resourceArticles = [
     isoDate: "2026-03-05",
     category: "E-Book",
     categoryValue: "e-book",
-    pdf: "https://learmedical.com/wp-content/uploads/2026/03/Fundamentals-of-Diagnostic-Error-in-Imaging-1.pdf",
-    image: "https://learmedical.com/wp-content/uploads/2026/03/thumbnail-0-2.jpeg",
+    pdf: "/mirrored/learmedical/wp-content/uploads/2026/03/Fundamentals-of-Diagnostic-Error-in-Imaging-1.pdf",
+    image: "/mirrored/learmedical/wp-content/uploads/2026/03/thumbnail-0-2.jpeg",
   },
   {
     title: "Errors and Cost",
@@ -23,8 +23,8 @@ export const resourceArticles = [
     isoDate: "2026-03-05",
     category: "E-Book",
     categoryValue: "e-book",
-    pdf: "https://learmedical.com/wp-content/uploads/2026/03/Errors-and-Cost.pdf",
-    image: "https://learmedical.com/wp-content/uploads/2026/03/download.png",
+    pdf: "/mirrored/learmedical/wp-content/uploads/2026/03/Errors-and-Cost.pdf",
+    image: "/mirrored/learmedical/wp-content/uploads/2026/03/download.png",
   },
   {
     title: "An International Survey of Quality and Safety Programs in Radiology",
@@ -32,8 +32,8 @@ export const resourceArticles = [
     isoDate: "2026-03-05",
     category: "E-Book",
     categoryValue: "e-book",
-    pdf: "https://learmedical.com/wp-content/uploads/2026/03/An-International-Survey-of-Quality-and-Safety-Programs-in-Radiology.pdf",
-    image: "https://learmedical.com/wp-content/uploads/2026/03/thumbnail-0.jpeg",
+    pdf: "/mirrored/learmedical/wp-content/uploads/2026/03/An-International-Survey-of-Quality-and-Safety-Programs-in-Radiology.pdf",
+    image: "/mirrored/learmedical/wp-content/uploads/2026/03/thumbnail-0.jpeg",
   },
   {
     title: "Clinical Radiology Workforce Census Report",
@@ -41,8 +41,8 @@ export const resourceArticles = [
     isoDate: "2026-03-05",
     category: "E-Book",
     categoryValue: "e-book",
-    pdf: "https://learmedical.com/wp-content/uploads/2026/03/rcr-2024-clinical-radiology-workforce-census-report.pdf",
-    image: "https://learmedical.com/wp-content/uploads/2026/03/Screenshot-2026-03-05-191550.png",
+    pdf: "/mirrored/learmedical/wp-content/uploads/2026/03/rcr-2024-clinical-radiology-workforce-census-report.pdf",
+    image: "/mirrored/learmedical/wp-content/uploads/2026/03/Screenshot-2026-03-05-191550.png",
   },
 ];
 
