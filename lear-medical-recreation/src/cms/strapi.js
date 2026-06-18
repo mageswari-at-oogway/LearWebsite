@@ -156,9 +156,15 @@ export async function getPage(path) {
 export async function getResourceArticles() {
   const response = await fetchStrapi("/api/resource-articles?pagination[pageSize]=100&populate=*");
   const cmsArticles = response?.data?.map(normalizeResourceArticle).filter((article) => article.title && article.pdf && article.image) || [];
-  cmsArticles.sort((a, b) => String(b.isoDate || "").localeCompare(String(a.isoDate || "")));
+  const articles = [...cmsArticles, ...fallbackResourceArticles];
+  const uniqueArticles = articles.filter((article, index, list) => {
+    const key = `${article.title}|${article.pdf}`;
+    return list.findIndex((item) => `${item.title}|${item.pdf}` === key) === index;
+  });
 
-  return cmsArticles.length ? cmsArticles : fallbackResourceArticles;
+  uniqueArticles.sort((a, b) => String(b.isoDate || "").localeCompare(String(a.isoDate || "")));
+
+  return uniqueArticles;
 }
 
 export const strapiConfig = {
