@@ -109,6 +109,8 @@ body {
 
 .trusted-clients.swiper {
   overflow: hidden;
+  margin: 44px 0 56px;
+  padding: 34px 0;
 }
 
 .trusted-clients .swiper-wrapper {
@@ -123,6 +125,33 @@ body {
 
 .trusted-clients .trusted-logo {
   min-width: 156px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 96px;
+}
+
+.trusted-partners-sec {
+  padding-bottom: 72px;
+}
+
+.trusted-partners-sec .getintuch-box {
+  margin-top: 6px;
+}
+
+@media (max-width: 767px) {
+  .trusted-clients.swiper {
+    margin: 32px 0 38px;
+    padding: 28px 0;
+  }
+
+  .trusted-clients .trusted-logo {
+    min-height: 86px;
+  }
+
+  .trusted-partners-sec .getintuch-box {
+    margin-top: 8px;
+  }
 }
 
 .lear-social-fallback img {
