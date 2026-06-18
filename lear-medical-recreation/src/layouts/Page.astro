@@ -1,6 +1,6 @@
 ---
 import "../styles.css";
-import { buildJsonLd } from "../seo.js";
+import { buildJsonLd, prepareSeoHtml } from "../seo.js";
 
 const { bodyClass, html, path, seo, title = "Lear Medical" } = Astro.props;
 const pageSeo = seo || {
@@ -12,6 +12,7 @@ const pageSeo = seo || {
   keywords: "radiology quality assurance, diagnostic safety",
 };
 const jsonLd = buildJsonLd(pageSeo);
+const seoHtml = prepareSeoHtml(path, html);
 ---
 <!doctype html>
 <html lang="en" class="no-js">
@@ -40,7 +41,7 @@ const jsonLd = buildJsonLd(pageSeo);
     {jsonLd.map((item) => <script type="application/ld+json" set:html={JSON.stringify(item)} />)}
   </head>
   <body class={bodyClass} data-lear-path={path}>
-    <div class="source-site" set:html={html} />
+    <div class="source-site" set:html={seoHtml} />
     <script>
       import "../scripts/site.js";
     </script>

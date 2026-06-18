@@ -3,6 +3,18 @@
 @import "/assets/source/4ef75bfcaeb5e844.css";
 @import "/assets/source/373d0679e1b439b1.css";
 
+.seo-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 @font-face {
   font-family: "Metropolis";
   src: url("/assets/source/7b8c41b64553cfc8.woff2") format("woff2");

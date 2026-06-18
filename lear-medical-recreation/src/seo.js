@@ -16,7 +16,7 @@ export const seoByPath = {
   "/": {
     title: "Lear Medical | Radiology Quality, Safety and Performance",
     description:
-      "Lear Medical helps hospitals, diagnostic centers and teleradiology teams improve radiology quality, productivity, efficiency and diagnostic safety through aviation-inspired QA programs.",
+      "Lear Medical helps hospitals and radiology teams improve diagnostic quality, productivity, efficiency and safety through aviation-inspired QA programs.",
     keywords:
       "radiology quality assurance, radiology peer review, diagnostic error reduction, radiology performance, healthcare quality improvement",
     type: "website",
@@ -24,19 +24,19 @@ export const seoByPath = {
   "/about": {
     title: "About Lear Medical | Radiology Quality and Diagnostic Safety",
     description:
-      "Learn how Lear Medical applies aviation-inspired safety systems and the S.P.E.Q. framework to improve radiology quality, productivity, efficiency and reporting consistency.",
+      "Learn how Lear Medical applies aviation-inspired safety systems and the S.P.E.Q. framework to improve radiology quality and reporting consistency.",
     keywords:
       "about Lear Medical, radiology quality, diagnostic safety, S.P.E.Q framework, radiology workflow improvement",
   },
   "/services": {
-    title: "Lear Medical Services | Radiology QA, Peer Review and Compliance",
+    title: "Radiology QA and Peer Review Services | Lear Medical",
     description:
-      "Explore Lear Medical services for enterprise QA transformation, basic QA assessment, radiology peer review, compliance alignment, efficiency improvement and continuous learning.",
+      "Explore Lear Medical services for enterprise QA transformation, QA assessment, radiology peer review, compliance alignment and efficiency improvement.",
     keywords:
       "radiology QA services, radiology peer review services, NABH radiology compliance, diagnostic imaging quality, teleradiology quality assurance",
   },
   "/resources": {
-    title: "Lear Medical Resources | Radiology Quality Papers and Case Studies",
+    title: "Radiology Quality Resources and Case Studies | Lear Medical",
     description:
       "Access Lear Medical resources including white papers, e-books and case studies on diagnostic error, radiology workforce, quality programs and imaging safety.",
     keywords:
@@ -189,4 +189,58 @@ export function buildJsonLd(seo) {
   }
 
   return [organization, website, breadcrumb, webPage];
+}
+
+const h1LabelsByPath = {
+  "/contact": "Contact Lear Medical",
+};
+
+function appendClass(attrs, className) {
+  if (/\sclass=/.test(attrs)) {
+    return attrs.replace(/\sclass=(["'])(.*?)\1/i, (_match, quote, value) => {
+      const classes = value.split(/\s+/);
+      return classes.includes(className)
+        ? ` class=${quote}${value}${quote}`
+        : ` class=${quote}${value} ${className}${quote}`;
+    });
+  }
+
+  return `${attrs} class="${className}"`;
+}
+
+function addAltToImage(tag) {
+  if (/\salt=/.test(tag)) {
+    return tag;
+  }
+
+  const src = tag.match(/\ssrc=(["'])(.*?)\1/i)?.[2] || "";
+  let alt = "";
+  if (src.includes("serv4-2.svg")) {
+    alt = "Radiology quality assurance workflow";
+  }
+
+  return tag.replace(/>$/, ` alt="${alt}">`);
+}
+
+export function prepareSeoHtml(path, html) {
+  let prepared = html
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/<section\b(?=[^>]*\bd-none\b)[\s\S]*?<\/section>/gi, "")
+    .replace(/<img\b[^>]*>/gi, addAltToImage);
+
+  let h1Seen = false;
+  prepared = prepared.replace(/<h1\b([^>]*)>([\s\S]*?)<\/h1>/gi, (_match, attrs, content) => {
+    if (!h1Seen) {
+      h1Seen = true;
+      return `<h1${attrs}>${content}</h1>`;
+    }
+
+    return `<h2${appendClass(attrs, "h1")}>${content}</h2>`;
+  });
+
+  if (!h1Seen && h1LabelsByPath[path]) {
+    prepared = `<h1 class="seo-visually-hidden">${h1LabelsByPath[path]}</h1>${prepared}`;
+  }
+
+  return prepared;
 }
