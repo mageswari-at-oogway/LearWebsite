@@ -1,12 +1,14 @@
 ---
 import Page from "../layouts/Page.astro";
+import { getSeo } from "../seo.js";
 import { sourceBodyClasses, sourcePages } from "../sourcePages.js";
 
 const path = "/";
+const seo = getSeo(path);
 ---
 <Page
   path={path}
   bodyClass={sourceBodyClasses[path]}
   html={sourcePages[path]}
-  title="Lear Medical"
+  seo={seo}
 />

@@ -1,6 +1,7 @@
 ---
 import Page from "../layouts/Page.astro";
 import { injectResourceArticles } from "../resourceArticles.js";
+import { getSeo } from "../seo.js";
 import { sourceBodyClasses, sourcePages } from "../sourcePages.js";
 
 export function getStaticPaths() {
@@ -19,11 +20,11 @@ if (!sourceHtml || !bodyClass) {
   throw new Error(`Missing source page content for ${path}`);
 }
 const html = path === "/resources" ? injectResourceArticles(sourceHtml) : sourceHtml;
-const label = path === "/" ? "" : ` | ${path.slice(1).replace(/-/g, " ")}`;
+const seo = getSeo(path);
 ---
 <Page
   path={path}
   bodyClass={bodyClass}
   html={html}
-  title={`Lear Medical${label}`}
+  seo={seo}
 />

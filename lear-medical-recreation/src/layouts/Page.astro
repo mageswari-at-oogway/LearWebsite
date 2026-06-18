@@ -1,7 +1,17 @@
 ---
 import "../styles.css";
+import { buildJsonLd } from "../seo.js";
 
-const { bodyClass, html, path, title = "Lear Medical" } = Astro.props;
+const { bodyClass, html, path, seo, title = "Lear Medical" } = Astro.props;
+const pageSeo = seo || {
+  title,
+  description: "Lear Medical helps improve radiology quality, safety and diagnostic performance.",
+  canonical: "https://learwebsite.pages.dev/",
+  image: "https://learwebsite.pages.dev/mirrored/learmedical/wp-content/uploads/2026/02/banner-main-1.jpg",
+  siteName: "Lear Medical",
+  keywords: "radiology quality assurance, diagnostic safety",
+};
+const jsonLd = buildJsonLd(pageSeo);
 ---
 <!doctype html>
 <html lang="en" class="no-js">
@@ -9,7 +19,25 @@ const { bodyClass, html, path, title = "Lear Medical" } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content="Astro" />
-    <title>{title}</title>
+    <title>{pageSeo.title}</title>
+    <meta name="description" content={pageSeo.description} />
+    <meta name="keywords" content={pageSeo.keywords} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="author" content="Lear Medical" />
+    <link rel="canonical" href={pageSeo.canonical} />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM context for Lear Medical" />
+    <meta property="og:site_name" content={pageSeo.siteName} />
+    <meta property="og:type" content={pageSeo.type || "website"} />
+    <meta property="og:title" content={pageSeo.title} />
+    <meta property="og:description" content={pageSeo.description} />
+    <meta property="og:url" content={pageSeo.canonical} />
+    <meta property="og:image" content={pageSeo.image} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageSeo.title} />
+    <meta name="twitter:description" content={pageSeo.description} />
+    <meta name="twitter:image" content={pageSeo.image} />
+    {jsonLd.map((item) => <script type="application/ld+json" set:html={JSON.stringify(item)} />)}
   </head>
   <body class={bodyClass} data-lear-path={path}>
     <div class="source-site" set:html={html} />
