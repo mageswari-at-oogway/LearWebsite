@@ -3,6 +3,7 @@ import { resourceArticles, renderResourceCard } from "../resourceArticles.js";
 const loginUrl = "https://insights.learmedical.com/login";
 const formEndpoint = "/api/form";
 const brochureFormspreeEndpoint = "https://formspree.io/f/xkoallnj";
+const caseStudyFormspreeEndpoint = "https://formspree.io/f/xnjykkqg";
 const defaultBrochureUrl = "/media/site/uploads/2026/02/Case-Study-Teleradiology-Service-Provider-V2.pdf";
 const routes = new Set(["/", "/about", "/services", "/resources", "/contact"]);
 let currentPdfUrl = "";
@@ -368,6 +369,7 @@ function triggerDownload(url) {
 
 async function submitLeadForm(form) {
   const isDownloadForm = Boolean(form.querySelector('[name="pdf_url"]')) || Boolean(form.closest("#downloadPopup, #casestudy-pop"));
+  const isCaseStudyForm = Boolean(form.closest("#casestudy-pop"));
   const pdfUrl = isDownloadForm ? getFormValue(form, ["pdf_url"]) || currentPdfUrl || defaultBrochureUrl : "";
   const payload = {
     type: isDownloadForm ? "download" : "contact",
@@ -393,7 +395,11 @@ async function submitLeadForm(form) {
   setFormMessage(form, "Sending...", "submitting");
 
   try {
-    const endpoint = isDownloadForm ? brochureFormspreeEndpoint : formEndpoint;
+    const endpoint = isDownloadForm
+      ? isCaseStudyForm
+        ? caseStudyFormspreeEndpoint
+        : brochureFormspreeEndpoint
+      : formEndpoint;
     const requestPayload = isDownloadForm
       ? {
         name: payload.name,
@@ -403,7 +409,7 @@ async function submitLeadForm(form) {
         message: payload.message,
         pdf_url: pdfUrl,
         page_url: payload.pageUrl,
-        _subject: `Brochure download request: ${payload.name}`,
+        _subject: `${isCaseStudyForm ? "Case study" : "Brochure"} download request: ${payload.name}`,
       }
       : payload;
     const response = await fetch(endpoint, {

@@ -39,7 +39,9 @@ Editors add resource articles in Strapi. The Astro frontend reads published CMS 
 
 The frontend includes a Cloudflare Pages Function at `frontend/functions/api/form.js`.
 
-Brochure/download forms submit to Formspree at `https://formspree.io/f/xkoallnj`, then start the PDF download for the visitor.
+Brochure downloads submit to Formspree at `https://formspree.io/f/xkoallnj`, then start the PDF download for the visitor.
+
+Case study downloads submit to Formspree at `https://formspree.io/f/xnjykkqg`, then start the selected PDF download for the visitor.
 
 The contact form can use the Cloudflare Pages Function. Add these environment variables in Cloudflare Pages to send contact leads to the site owner:
 
@@ -49,4 +51,4 @@ FORM_OWNER_EMAIL=info@learmedical.com
 FORM_FROM_EMAIL="Lear Medical <no-reply@learmedical.com>"
 ```
 
-For brochure emails, configure the owner notification inside the Formspree form settings.
+For brochure and case study emails, configure owner notifications inside each Formspree form's settings.
