@@ -1,7 +1,7 @@
 import { resourceArticles, renderResourceCard } from "../resourceArticles.js";
 
 const loginUrl = "https://insights.learmedical.com/login";
-const formEndpoint = "/api/form";
+const contactFormspreeEndpoint = "https://formspree.io/f/mlgkyyek";
 const brochureFormspreeEndpoint = "https://formspree.io/f/xkoallnj";
 const caseStudyFormspreeEndpoint = "https://formspree.io/f/xnjykkqg";
 const defaultBrochureUrl = "/media/site/uploads/2026/02/Case-Study-Teleradiology-Service-Provider-V2.pdf";
@@ -399,7 +399,7 @@ async function submitLeadForm(form) {
       ? isCaseStudyForm
         ? caseStudyFormspreeEndpoint
         : brochureFormspreeEndpoint
-      : formEndpoint;
+      : contactFormspreeEndpoint;
     const requestPayload = isDownloadForm
       ? {
         name: payload.name,
@@ -411,7 +411,15 @@ async function submitLeadForm(form) {
         page_url: payload.pageUrl,
         _subject: `${isCaseStudyForm ? "Case study" : "Brochure"} download request: ${payload.name}`,
       }
-      : payload;
+      : {
+        name: payload.name,
+        email: payload.email,
+        phone: payload.phone,
+        organization: payload.organization,
+        message: payload.message,
+        page_url: payload.pageUrl,
+        _subject: `Website contact request: ${payload.name}`,
+      };
     const response = await fetch(endpoint, {
       method: "POST",
       headers: {
