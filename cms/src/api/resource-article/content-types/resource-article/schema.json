@@ -19,15 +19,14 @@
       "type": "date",
       "required": true
     },
-    "displayDate": {
-      "type": "string"
-    },
     "category": {
-      "type": "string",
-      "required": true
-    },
-    "categoryValue": {
-      "type": "string"
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "White Paper",
+        "E-Book",
+        "Case Study"
+      ]
     },
     "image": {
       "type": "media",
