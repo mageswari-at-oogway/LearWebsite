@@ -1,6 +1,8 @@
 import { resourceArticles, renderResourceCard } from "../resourceArticles.js";
 
 const loginUrl = "https://insights.learmedical.com/login";
+const formEndpoint = "/api/form";
+const defaultBrochureUrl = "/media/site/uploads/2026/02/Case-Study-Teleradiology-Service-Provider-V2.pdf";
 const routes = new Set(["/", "/about", "/services", "/resources", "/contact"]);
 let currentPdfUrl = "";
 
@@ -330,7 +332,104 @@ function setSelectedPdf(url) {
 
 function openPdfGate() {
   closeModal(document.querySelector("#pdfViewModal.show"));
+  setSelectedPdf(currentPdfUrl || defaultBrochureUrl);
   openModal(document.getElementById("casestudy-pop") ? "#casestudy-pop" : "#downloadPopup");
+}
+
+function getFormValue(form, names) {
+  for (const name of names) {
+    const field = form.elements.namedItem(name);
+    if (field && "value" in field) return field.value.trim();
+  }
+  return "";
+}
+
+function setFormMessage(form, message, status = "init") {
+  const output = form.querySelector(".wpcf7-response-output");
+  if (!output) return;
+  output.removeAttribute("aria-hidden");
+  output.textContent = message;
+  form.dataset.status = status;
+  form.classList.remove("init", "sent", "failed", "invalid", "submitting");
+  form.classList.add(status);
+}
+
+function triggerDownload(url) {
+  if (!url) return;
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = url.split("/").pop() || "lear-medical-download.pdf";
+  link.rel = "noopener";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+}
+
+async function submitLeadForm(form) {
+  const isDownloadForm = Boolean(form.querySelector('[name="pdf_url"]')) || Boolean(form.closest("#downloadPopup, #casestudy-pop"));
+  const pdfUrl = isDownloadForm ? getFormValue(form, ["pdf_url"]) || currentPdfUrl || defaultBrochureUrl : "";
+  const payload = {
+    type: isDownloadForm ? "download" : "contact",
+    name: getFormValue(form, ["your-name", "user-name"]),
+    email: getFormValue(form, ["your-email", "user-email"]),
+    phone: getFormValue(form, ["your-phone", "phone-number"]),
+    organization: getFormValue(form, ["your-organization"]),
+    message: getFormValue(form, ["your-message", "user-message"]),
+    pdfUrl,
+    pageUrl: window.location.href,
+    website: getFormValue(form, ["website"]),
+  };
+
+  if (!payload.name || !payload.email || !payload.phone) {
+    setFormMessage(form, "Please enter your name, email, and phone number.", "invalid");
+    return;
+  }
+
+  const submitters = [...form.querySelectorAll('[type="submit"]')];
+  submitters.forEach((button) => {
+    button.disabled = true;
+  });
+  setFormMessage(form, "Sending...", "submitting");
+
+  try {
+    const response = await fetch(formEndpoint, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || !result.ok) {
+      throw new Error(result.message || "We could not send your request right now. Please try again.");
+    }
+
+    setFormMessage(form, result.message || "Thank you. Your request has been sent.", "sent");
+    form.reset();
+
+    if (isDownloadForm) {
+      triggerDownload(result.downloadUrl || pdfUrl);
+      window.setTimeout(() => closeModal(form.closest(".modal")), 900);
+    }
+  } catch (error) {
+    setFormMessage(form, error.message, "failed");
+  } finally {
+    submitters.forEach((button) => {
+      button.disabled = false;
+    });
+  }
+}
+
+function setupLeadForms() {
+  document.querySelectorAll("form.wpcf7-form").forEach((form) => {
+    if (form.dataset.learFormHandler === "true") return;
+    form.dataset.learFormHandler = "true";
+    if (form.querySelector('[name="pdf_url"]')) setSelectedPdf(getFormValue(form, ["pdf_url"]) || defaultBrochureUrl);
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      submitLeadForm(form);
+    });
+  });
 }
 
 function setupClickHandlers() {
@@ -408,6 +507,7 @@ function setupPage() {
   });
   setupScrollTop();
   setupQueryScroll();
+  setupLeadForms();
   setupClickHandlers();
 }
 
