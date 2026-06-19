@@ -328,8 +328,9 @@ function setupLoginButtons() {
 
 function setSelectedPdf(url) {
   currentPdfUrl = url || currentPdfUrl;
-  const field = document.getElementById("pdf_url");
-  if (field && "value" in field) field.value = currentPdfUrl;
+  document.querySelectorAll('[name="pdf_url"]').forEach((field) => {
+    if ("value" in field) field.value = currentPdfUrl;
+  });
 }
 
 function openPdfGate() {
@@ -373,10 +374,10 @@ async function submitLeadForm(form) {
   const pdfUrl = isDownloadForm ? getFormValue(form, ["pdf_url"]) || currentPdfUrl || defaultBrochureUrl : "";
   const payload = {
     type: isDownloadForm ? "download" : "contact",
-    name: getFormValue(form, ["your-name", "user-name"]),
-    email: getFormValue(form, ["your-email", "user-email"]),
+    name: getFormValue(form, ["your-name", "user-name", "full-name"]),
+    email: getFormValue(form, ["your-email", "user-email", "email-address"]),
     phone: getFormValue(form, ["your-phone", "phone-number"]),
-    organization: getFormValue(form, ["your-organization"]),
+    organization: getFormValue(form, ["your-organization", "organization-name"]),
     message: getFormValue(form, ["your-message", "user-message"]),
     pdfUrl,
     pageUrl: window.location.href,
