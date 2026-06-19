@@ -13,6 +13,7 @@ const pageSeo = seo || {
 };
 const jsonLd = buildJsonLd(pageSeo);
 const seoHtml = prepareSeoHtml(path, html);
+const serializedResourceArticles = JSON.stringify(Astro.props.resourceArticles || []).replace(/</g, "\\u003c");
 ---
 <!doctype html>
 <html lang="en" class="no-js">
@@ -42,6 +43,7 @@ const seoHtml = prepareSeoHtml(path, html);
   </head>
   <body class={bodyClass} data-lear-path={path}>
     <div class="site-shell" set:html={seoHtml} />
+    {path === "/resources" && <script type="application/json" id="lear-resource-articles" set:html={serializedResourceArticles} />}
     <script>
       import "../scripts/site.js";
     </script>

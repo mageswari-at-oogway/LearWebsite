@@ -79,7 +79,7 @@ function normalizePage(entry) {
   return {
     path,
     bodyClass: attributes.bodyClass || siteBodyClasses[path] || siteBodyClasses["/"],
-    html: attributes.html || attributes.contentHtml || attributes.body || sitePages[path],
+    html: sitePages[path],
     seo: normalizeSeo(attributes),
   };
 }

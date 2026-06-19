@@ -1,4 +1,4 @@
-import { resourceArticles, renderResourceCard } from "../resourceArticles.js";
+import { normalizeResourceArticle, resourceArticles, renderResourceCard } from "../resourceArticles.js";
 
 const loginUrl = "https://insights.learmedical.com/login";
 const contactFormspreeEndpoint = "https://formspree.io/f/mlgkyyek";
@@ -223,6 +223,17 @@ function setupResourceArticles(path) {
   if (!form || !results || form.dataset.localResourceFilter === "true") return;
 
   form.dataset.localResourceFilter = "true";
+  const articlesSource = document.getElementById("lear-resource-articles");
+  let resolvedResourceArticles = resourceArticles;
+  if (articlesSource?.textContent) {
+    try {
+      resolvedResourceArticles = JSON.parse(articlesSource.textContent)
+        .map(normalizeResourceArticle)
+        .filter((article) => article.pdf && article.image);
+    } catch {
+      resolvedResourceArticles = resourceArticles;
+    }
+  }
 
   const getSortValue = () => {
     const visibleSort = [...form.querySelectorAll('[name="sort"]')]
@@ -249,7 +260,7 @@ function setupResourceArticles(path) {
     const category = String(data.get("category") || "");
     const sort = getSortValue();
 
-    let articles = resourceArticles.filter((article) => {
+    let articles = resolvedResourceArticles.filter((article) => {
       const matchesSearch = !search || article.title.toLowerCase().includes(search);
       const matchesCategory = !category || article.categoryValue === category;
       const matchesFrom = !fromDate || article.isoDate >= fromDate;

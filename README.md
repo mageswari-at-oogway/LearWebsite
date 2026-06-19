@@ -8,7 +8,6 @@ This repository is organized as a two-app workspace:
 ## Frontend
 
 ```bash
-cd frontend
 npm install
 npm run dev
 npm run build
@@ -16,22 +15,23 @@ npm run build
 
 Cloudflare Pages should use:
 
-- Root directory: `frontend`
+- Root directory: `/`
 - Build command: `npm run build`
-- Output directory: `dist`
+- Output directory: `frontend/dist`
 
 ## CMS
 
 ```bash
-cd cms
 npm install
-npm run develop
+npm run cms:develop
 ```
 
 Strapi Cloud should use:
 
-- Root directory: `cms`
+- Root directory: `/`
 - Branch: `main`
+- Build command: `npm run cms:build`
+- Start command: `npm run cms:start`
 
 Editors add resource articles in Strapi. The Astro frontend reads published CMS content during build using `STRAPI_URL` and `STRAPI_API_TOKEN`.
 

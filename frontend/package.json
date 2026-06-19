@@ -8,6 +8,9 @@
     "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview --host 127.0.0.1 --port 5173"
   },
+  "engines": {
+    "node": ">=20 <=24"
+  },
   "dependencies": {
     "astro": "^5.16.4"
   }
