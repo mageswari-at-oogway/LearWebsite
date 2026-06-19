@@ -2,6 +2,7 @@ import { resourceArticles, renderResourceCard } from "../resourceArticles.js";
 
 const loginUrl = "https://insights.learmedical.com/login";
 const formEndpoint = "/api/form";
+const brochureFormspreeEndpoint = "https://formspree.io/f/xkoallnj";
 const defaultBrochureUrl = "/media/site/uploads/2026/02/Case-Study-Teleradiology-Service-Provider-V2.pdf";
 const routes = new Set(["/", "/about", "/services", "/resources", "/contact"]);
 let currentPdfUrl = "";
@@ -392,23 +393,44 @@ async function submitLeadForm(form) {
   setFormMessage(form, "Sending...", "submitting");
 
   try {
-    const response = await fetch(formEndpoint, {
+    const endpoint = isDownloadForm ? brochureFormspreeEndpoint : formEndpoint;
+    const requestPayload = isDownloadForm
+      ? {
+        name: payload.name,
+        email: payload.email,
+        phone: payload.phone,
+        organization: payload.organization,
+        message: payload.message,
+        pdf_url: pdfUrl,
+        page_url: payload.pageUrl,
+        _subject: `Brochure download request: ${payload.name}`,
+      }
+      : payload;
+    const response = await fetch(endpoint, {
       method: "POST",
       headers: {
+        accept: "application/json",
         "content-type": "application/json",
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(requestPayload),
     });
     const result = await response.json().catch(() => ({}));
-    if (!response.ok || !result.ok) {
-      throw new Error(result.message || "We could not send your request right now. Please try again.");
+    if (!response.ok || result.ok === false) {
+      const formspreeErrors = Array.isArray(result.errors)
+        ? result.errors.map((item) => item.message || item.code).filter(Boolean).join(" ")
+        : "";
+      throw new Error(formspreeErrors || result.message || "We could not send your request right now. Please try again.");
     }
 
-    setFormMessage(form, result.message || "Thank you. Your request has been sent.", "sent");
+    setFormMessage(
+      form,
+      isDownloadForm ? "Thank you. Your download is starting now." : result.message || "Thank you. Your request has been sent.",
+      "sent"
+    );
     form.reset();
 
     if (isDownloadForm) {
-      triggerDownload(result.downloadUrl || pdfUrl);
+      triggerDownload(pdfUrl);
       window.setTimeout(() => closeModal(form.closest(".modal")), 900);
     }
   } catch (error) {
