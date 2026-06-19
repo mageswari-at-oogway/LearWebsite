@@ -1,0 +1,26 @@
+{
+  "name": "lear-medical-cms",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Strapi CMS for Lear Medical website content.",
+  "scripts": {
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi"
+  },
+  "dependencies": {
+    "@strapi/plugin-cloud": "^5.0.0",
+    "@strapi/plugin-users-permissions": "^5.0.0",
+    "@strapi/strapi": "^5.0.0",
+    "better-sqlite3": "^11.0.0",
+    "pg": "^8.13.0"
+  },
+  "engines": {
+    "node": ">=20 <=24",
+    "npm": ">=10"
+  },
+  "strapi": {
+    "uuid": "lear-medical-cms"
+  }
+}

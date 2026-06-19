@@ -2,5 +2,9 @@ node_modules/
 dist/
 .astro/
 .npm-cache/
+.env
+.env.*
+!.env.example
+.tmp/
 .DS_Store
 captures/

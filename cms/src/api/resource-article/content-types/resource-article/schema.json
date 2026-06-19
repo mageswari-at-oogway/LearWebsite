@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "resource_articles",
+  "info": {
+    "singularName": "resource-article",
+    "pluralName": "resource-articles",
+    "displayName": "Resource Article",
+    "description": "Articles, reports, and PDFs shown on the Resources page."
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "isoDate": {
+      "type": "date",
+      "required": true
+    },
+    "displayDate": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "required": true
+    },
+    "categoryValue": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "pdf": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "files"
+      ]
+    }
+  }
+}
