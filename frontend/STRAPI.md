@@ -40,8 +40,10 @@ Collection type: `resource-article`
 - `displayDate` Text, optional
 - `category` Text
 - `categoryValue` Text
-- `image` Media
-- `pdf` Media
+- `image` Media, optional
+- `imageUrl` Text, optional fallback when Strapi asset storage is unavailable
+- `pdf` Media, optional
+- `pdfUrl` Text, optional fallback when Strapi asset storage is unavailable
 
 ## Build Behavior
 
