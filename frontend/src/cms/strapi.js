@@ -96,8 +96,8 @@ function normalizeResourceArticle(entry) {
     isoDate: published ? String(published).slice(0, 10) : "",
     category,
     categoryValue: attributes.categoryValue || category.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
-    pdf: mediaUrl(attributes.pdf || attributes.file || attributes.download) || attributes.pdfUrl || attributes.fileUrl || attributes.downloadUrl,
-    image: mediaUrl(attributes.image || attributes.thumbnail || attributes.cover) || attributes.imageUrl || attributes.thumbnailUrl || attributes.coverUrl,
+    pdf: mediaUrl(attributes.pdf || attributes.file || attributes.download),
+    image: mediaUrl(attributes.image || attributes.thumbnail || attributes.cover),
   };
 }
 

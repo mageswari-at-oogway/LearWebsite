@@ -32,22 +32,18 @@
     "image": {
       "type": "media",
       "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images"
       ]
     },
-    "imageUrl": {
-      "type": "string"
-    },
     "pdf": {
       "type": "media",
       "multiple": false,
+      "required": true,
       "allowedTypes": [
         "files"
       ]
-    },
-    "pdfUrl": {
-      "type": "string"
     }
   }
 }
