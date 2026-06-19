@@ -19,6 +19,14 @@
       "type": "date",
       "required": true
     },
+    "displayDate": {
+      "type": "string",
+      "pluginOptions": {
+        "content-manager": {
+          "visible": false
+        }
+      }
+    },
     "category": {
       "type": "enumeration",
       "required": true,
@@ -27,6 +35,14 @@
         "E-Book",
         "Case Study"
       ]
+    },
+    "categoryValue": {
+      "type": "string",
+      "pluginOptions": {
+        "content-manager": {
+          "visible": false
+        }
+      }
     },
     "image": {
       "type": "media",
