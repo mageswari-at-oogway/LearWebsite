@@ -23,8 +23,13 @@
       "type": "string"
     },
     "category": {
-      "type": "string",
-      "required": true
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "White Paper",
+        "E-Book",
+        "Case Study"
+      ]
     },
     "categoryValue": {
       "type": "string"
