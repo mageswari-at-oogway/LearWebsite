@@ -37,7 +37,9 @@ Collection type: `resource-article`
 
 - `title` Text
 - `isoDate` Date
-- `category` Enumeration: `White Paper`, `E-Book`, `Case Study`
+- `displayDate` Text, optional
+- `category` Text
+- `categoryValue` Text, optional
 - `image` Media
 - `pdf` Media
 
