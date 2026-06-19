@@ -20,6 +20,9 @@
     "react-router-dom": "^6.30.2",
     "styled-components": "^6.1.19"
   },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-musl": "4.62.0"
+  },
   "engines": {
     "node": ">=20 <=24",
     "npm": ">=10"
