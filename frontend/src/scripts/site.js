@@ -4,7 +4,7 @@ const loginUrl = "https://insights.learmedical.com/login";
 const contactFormspreeEndpoint = "https://formspree.io/f/mlgkyyek";
 const brochureFormspreeEndpoint = "https://formspree.io/f/xkoallnj";
 const caseStudyFormspreeEndpoint = "https://formspree.io/f/xnjykkqg";
-const defaultBrochureUrl = "/media/site/uploads/2026/02/Case-Study-Teleradiology-Service-Provider-V2.pdf";
+const defaultBrochureUrl = "/media/site/uploads/2026/06/Lear-medical-brochure_Newcontent.pdf";
 const routes = new Set(["/", "/about", "/services", "/resources", "/contact"]);
 let currentPdfUrl = "";
 
