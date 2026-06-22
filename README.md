@@ -1,43 +1,71 @@
-# Lear Medical Platform
+# Lear Medical Website
 
-This repository is organized as a two-app workspace:
+Astro static website for Lear Medical with a Strapi CMS backend for resource articles.
 
-- `frontend/` - Astro static website deployed to Cloudflare Pages.
-- `cms/` - Strapi CMS backend deployed to Strapi Cloud.
+## Project Structure
 
-## Frontend
+```txt
+.
+├── astro.config.mjs
+├── public/
+├── src/
+├── cms/
+└── docs/
+```
+
+- `src/` contains the Astro website source.
+- `public/` contains static website assets.
+- `cms/` contains the Strapi CMS app.
+- `docs/` contains CMS and integration notes.
+
+## Website
 
 ```bash
 npm install
 npm run dev
 npm run build
+npm run preview
 ```
 
 Cloudflare Pages should use:
 
 - Root directory: `/`
 - Build command: `npm run build`
-- Output directory: `frontend/dist`
+- Output directory: `dist`
 
 ## CMS
 
 ```bash
+cd cms
 npm install
-npm run cms:develop
+npm run develop
 ```
 
 Strapi Cloud should use:
 
-- Root directory: `/`
+- Base directory: `cms`
 - Branch: `main`
-- Build command: `npm run cms:build`
-- Start command: `npm run cms:start`
+- Build command: `npm run build`
+- Start command: `npm run start`
 
-Editors add resource articles in Strapi. The Astro frontend reads published CMS content during build using `STRAPI_URL` and `STRAPI_API_TOKEN`.
+Editors add resource articles in Strapi. The Astro website reads published CMS content during build using `STRAPI_URL` and `STRAPI_API_TOKEN`.
+
+## Environment
+
+Copy `.env.example` to `.env` for local Strapi-backed builds.
+
+```bash
+STRAPI_URL=https://your-project.strapiapp.com
+STRAPI_API_TOKEN=your-read-token
+STRAPI_STRICT=false
+PUBLIC_SITE_URL=https://learwebsite.pages.dev
+```
+
+Do not commit `.env`.
 
 ## Forms
 
-Forms submit directly to Formspree from the static Astro frontend:
+Forms submit directly to Formspree from the static Astro website:
 
 - Contact: `https://formspree.io/f/mlgkyyek`
 - Brochure downloads: `https://formspree.io/f/xkoallnj`

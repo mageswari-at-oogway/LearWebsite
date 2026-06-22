@@ -1,18 +1,20 @@
 {
-  "name": "lear-medical-platform",
+  "name": "lear-medical-website",
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "workspaces": [
-    "frontend",
-    "cms"
-  ],
   "scripts": {
-    "dev": "npm run dev --workspace frontend",
-    "build": "npm run build --workspace frontend",
-    "preview": "npm run preview --workspace frontend",
-    "cms:develop": "npm run develop --workspace cms",
-    "cms:build": "npm run build --workspace cms",
-    "cms:start": "npm run start --workspace cms"
+    "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev --host 127.0.0.1 --port 5173",
+    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview --host 127.0.0.1 --port 5173",
+    "cms:develop": "npm run develop --prefix cms",
+    "cms:build": "npm run build --prefix cms",
+    "cms:start": "npm run start --prefix cms"
+  },
+  "engines": {
+    "node": ">=20 <=24"
+  },
+  "dependencies": {
+    "astro": "^5.16.4"
   }
 }
