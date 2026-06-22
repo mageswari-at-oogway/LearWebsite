@@ -15,11 +15,11 @@
 
 ## Key Pages
 
-- Home: https://learwebsite.pages.dev/
-- About: https://learwebsite.pages.dev/about
-- Services: https://learwebsite.pages.dev/services
-- Resources: https://learwebsite.pages.dev/resources
-- Contact: https://learwebsite.pages.dev/contact
+- Home: https://lear-medical-website.pages.dev/
+- About: https://lear-medical-website.pages.dev/about
+- Services: https://lear-medical-website.pages.dev/services
+- Resources: https://lear-medical-website.pages.dev/resources
+- Contact: https://lear-medical-website.pages.dev/contact
 
 ## What Lear Medical Provides
 

@@ -7,6 +7,7 @@
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev --host 127.0.0.1 --port 5173",
     "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview --host 127.0.0.1 --port 5173",
+    "deploy": "npm run build && wrangler pages deploy dist --project-name=lear-medical-website --branch=main",
     "cms:develop": "npm run develop --prefix cms",
     "cms:build": "npm run build --prefix cms",
     "cms:start": "npm run start --prefix cms"
@@ -16,5 +17,8 @@
   },
   "dependencies": {
     "astro": "^5.16.4"
+  },
+  "devDependencies": {
+    "wrangler": "^4.103.0"
   }
 }

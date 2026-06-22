@@ -4,13 +4,13 @@ This Astro site can build from Strapi at deploy time while keeping the current l
 
 ## Environment
 
-Copy `.env.example` to `.env` for local work, or add the same variables in Cloudflare Pages:
+Copy `.env.example` to `.env` for local work, or add the same variables in Cloudflare Dashboard → Workers & Pages → `lear-medical-website` → Settings → Environment variables:
 
 ```bash
 STRAPI_URL=https://your-project.strapiapp.com
 STRAPI_API_TOKEN=your-read-only-token
 STRAPI_STRICT=false
-PUBLIC_SITE_URL=https://learwebsite.pages.dev
+PUBLIC_SITE_URL=https://lear-medical-website.pages.dev
 ```
 
 If `STRAPI_URL` is empty, the site builds from local static content. If Strapi is configured but unavailable, the build falls back to local content unless `STRAPI_STRICT=true`.

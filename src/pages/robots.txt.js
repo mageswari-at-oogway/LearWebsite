@@ -1,4 +1,4 @@
-const siteUrl = ((import.meta.env || {}).PUBLIC_SITE_URL || "https://learwebsite.pages.dev").replace(/\/$/, "");
+const siteUrl = ((import.meta.env || {}).PUBLIC_SITE_URL || "https://lear-medical-website.pages.dev").replace(/\/$/, "");
 
 export function GET() {
   return new Response(

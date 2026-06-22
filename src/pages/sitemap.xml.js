@@ -1,6 +1,6 @@
 import { getSitePages } from "../cms/strapi.js";
 
-const siteUrl = ((import.meta.env || {}).PUBLIC_SITE_URL || "https://learwebsite.pages.dev").replace(/\/$/, "");
+const siteUrl = ((import.meta.env || {}).PUBLIC_SITE_URL || "https://lear-medical-website.pages.dev").replace(/\/$/, "");
 const updatedDate = "2026-06-18";
 
 function escapeXml(value) {

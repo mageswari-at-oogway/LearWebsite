@@ -27,11 +27,36 @@ npm run build
 npm run preview
 ```
 
-Cloudflare Pages should use:
+## Deployment (Cloudflare Pages)
 
+The site builds and deploys on **Cloudflare Pages** when you push to `main`. GitHub Actions is not used for builds.
+
+Connected repository: `oogway-lab/lear-medical-website`
+
+Cloudflare build settings:
+
+- Framework preset: Astro
 - Root directory: `/`
-- Build command: `npm run build`
+- Build command: `npm ci && npm run build`
 - Output directory: `dist`
+- Production branch: `main`
+
+Set these environment variables in Cloudflare Dashboard → Workers & Pages → `lear-medical-website` → Settings → Environment variables:
+
+| Variable | Production | Notes |
+|----------|------------|-------|
+| `PUBLIC_SITE_URL` | `https://lear-medical-website.pages.dev` | Already configured |
+| `STRAPI_STRICT` | `false` | Already configured |
+| `STRAPI_URL` | Your Strapi Cloud URL | Add when CMS is live |
+| `STRAPI_API_TOKEN` | Read-only token | Mark as encrypted secret |
+
+Preview deployments are enabled for all branches and pull requests.
+
+Manual deploy from your machine (optional):
+
+```bash
+npm run deploy
+```
 
 ## CMS
 
@@ -58,7 +83,7 @@ Copy `.env.example` to `.env` for local Strapi-backed builds.
 STRAPI_URL=https://your-project.strapiapp.com
 STRAPI_API_TOKEN=your-read-token
 STRAPI_STRICT=false
-PUBLIC_SITE_URL=https://learwebsite.pages.dev
+PUBLIC_SITE_URL=https://lear-medical-website.pages.dev
 ```
 
 Do not commit `.env`.
