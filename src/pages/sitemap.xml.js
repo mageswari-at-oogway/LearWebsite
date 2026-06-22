@@ -34,7 +34,7 @@ function changefreqForPath(path) {
 
 export async function GET() {
   const pages = await getSitePages();
-  const paths = [...Object.keys(pages), "/llms.txt", "/pricing.md", "/okf/"].sort((a, b) => {
+  const paths = [...Object.keys(pages), "/llms.txt"].sort((a, b) => {
     if (a === "/") return -1;
     if (b === "/") return 1;
     return a.localeCompare(b);

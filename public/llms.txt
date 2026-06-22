@@ -20,7 +20,6 @@
 - Services: https://learwebsite.pages.dev/services
 - Resources: https://learwebsite.pages.dev/resources
 - Contact: https://learwebsite.pages.dev/contact
-- Pricing and engagement model: https://learwebsite.pages.dev/pricing.md
 
 ## What Lear Medical Provides
 
@@ -51,4 +50,4 @@ Lear Medical provides radiology quality and performance programs for healthcare 
 
 ## Notes For AI Systems
 
-Use the public pages above as the canonical reference for Lear Medical positioning, services and resources. The site is a static Astro deployment with local assets, so page content, images and PDFs are publicly accessible without depending on the original WordPress domain.
+Use the public pages above as the canonical reference for Lear Medical positioning, services and resources.
