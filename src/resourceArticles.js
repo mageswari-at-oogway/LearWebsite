@@ -83,6 +83,11 @@ export function normalizeResourceArticle(article) {
   };
 }
 
+function isCaseStudyResource(article) {
+  const category = `${article.category} ${article.categoryValue}`.toLowerCase();
+  return category.includes("case-study") || category.includes("case study");
+}
+
 export function renderResourceCard(article) {
   const safeArticle = normalizeResourceArticle(article);
   const title = escapeHtml(safeArticle.title);
@@ -90,6 +95,9 @@ export function renderResourceCard(article) {
   const category = escapeHtml(safeArticle.category);
   const pdf = escapeHtml(safeArticle.pdf);
   const image = escapeHtml(safeArticle.image);
+  const requiresLeadForm = isCaseStudyResource(safeArticle);
+  const linkClass = requiresLeadForm ? "anchor-tag downloadpdf js-open-download" : "anchor-tag downloadpdf";
+  const linkTarget = requiresLeadForm ? "" : ` target="_blank" rel="noopener"`;
 
   return `
     <div class="resource-card" data-pdf="${pdf}" data-title="${title}">
@@ -101,7 +109,7 @@ export function renderResourceCard(article) {
           </div>
           <h5 class="article-heading-lear">${title}</h5>
           <div class="mt-4 d-flex gap-3">
-            <a href="#" class="anchor-tag downloadpdf js-open-download" data-pdf="${pdf}">
+            <a href="${requiresLeadForm ? "#" : pdf}" class="${linkClass}" data-pdf="${pdf}"${linkTarget}>
               <span>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1 7L7 13M7 13L13 7M7 13L7 0.999999" stroke="#1B2550" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

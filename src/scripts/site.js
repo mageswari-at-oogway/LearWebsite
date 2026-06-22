@@ -495,6 +495,15 @@ function setupClickHandlers() {
       return;
     }
 
+    const caseStudyCard = target.closest(".card-casestudy[href]");
+    const caseStudyHref = caseStudyCard?.getAttribute("href") || "";
+    if (caseStudyCard && /\.pdf(?:$|[?#])/i.test(caseStudyHref)) {
+      event.preventDefault();
+      setSelectedPdf(caseStudyHref);
+      openPdfGate();
+      return;
+    }
+
     const dismiss = target.closest("[data-bs-dismiss]");
     if (dismiss?.getAttribute("data-bs-dismiss") === "modal") {
       event.preventDefault();
