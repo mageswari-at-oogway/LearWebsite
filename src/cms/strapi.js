@@ -2,9 +2,10 @@ import { resourceArticles as fallbackResourceArticles } from "../resourceArticle
 import { siteBodyClasses, sitePages } from "../content/pages.js";
 
 const env = import.meta.env || {};
-const strapiUrl = (env.STRAPI_URL || env.PUBLIC_STRAPI_URL || "").replace(/\/$/, "");
-const strapiToken = env.STRAPI_API_TOKEN || "";
-const strictMode = env.STRAPI_STRICT === "true";
+const nodeEnv = globalThis.process?.env || {};
+const strapiUrl = (env.STRAPI_URL || env.PUBLIC_STRAPI_URL || nodeEnv.STRAPI_URL || nodeEnv.PUBLIC_STRAPI_URL || "").replace(/\/$/, "");
+const strapiToken = env.STRAPI_API_TOKEN || nodeEnv.STRAPI_API_TOKEN || "";
+const strictMode = (env.STRAPI_STRICT || nodeEnv.STRAPI_STRICT) === "true";
 
 function isEnabled() {
   return Boolean(strapiUrl);
